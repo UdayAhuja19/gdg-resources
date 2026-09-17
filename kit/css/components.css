@@ -446,3 +446,24 @@
   border: var(--stroke) solid var(--ink);
   border-radius: var(--radius-inner);
 }
+
+/* Phones: the club-name pill gets its own row so the top bar never overflows */
+@media (max-width: 640px) {
+  .topbar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .topbar .pill--header {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: center;
+    max-width: 100%;
+    font-size: 11px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .topbar > span:empty {
+    display: none;
+  }
+}

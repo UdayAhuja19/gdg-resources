@@ -8,6 +8,8 @@ Shared tools and brand files for the team, live at **https://udayahuja19.github.
 | DESIGN.md | [`design/DESIGN.md`](design/DESIGN.md) | The same rules as a text file for designers, projects and AI assistants |
 | Starter page | [`design/starter.html`](design/starter.html) | A blank page already using the brand kit |
 | Week planner | [`week-planner/`](week-planner/index.html) | Finds event times that suit the most students' class timetables |
+| Arcade | [gdg-arcade demo](https://udayahuja19.github.io/gdg-arcade/) | The single-player booth games (online scores stay on each device) |
+| Party | [`party/`](party/index.html) | The 4-player phone games (prototype) and how to run them from the booth laptop through a Cloudflare tunnel |
 
 ## The brand kit
 

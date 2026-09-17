@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GDG Party Games</title>
+  <link rel="icon" href="../kit/assets/logo-mark.svg">
+  <link rel="stylesheet" href="../kit/css/tokens.css">
+  <link rel="stylesheet" href="../kit/css/base.css">
+  <link rel="stylesheet" href="../kit/css/components.css">
+  <style>
+    .hero {
+      display: grid;
+      justify-items: center;
+      gap: var(--space-4);
+      padding-block: var(--space-7) var(--space-6);
+      text-align: center;
+    }
+
+    .hero .t-display {
+      font-size: clamp(56px, 13vw, 150px);
+    }
+
+    .stack {
+      display: grid;
+      gap: var(--space-6);
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .game {
+      display: grid;
+      align-content: start;
+      gap: var(--space-3);
+    }
+
+    .game p,
+    .steps li,
+    .why p {
+      text-transform: none;
+      line-height: 1.55;
+    }
+
+    .steps {
+      display: grid;
+      gap: var(--space-4);
+      counter-reset: step;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: var(--space-3);
+      align-items: start;
+      counter-increment: step;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: var(--yellow);
+      border: var(--stroke-thin) solid var(--ink);
+      border-radius: 50%;
+    }
+
+    .steps .code {
+      margin-top: var(--space-2);
+    }
+
+    .why {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    .foot {
+      padding-block: var(--space-7);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="pill pill--sm" href="../">&lt; RESOURCES</a>
+      <span class="pill pill--header">GOOGLE DEVELOPERS GROUP ON CAMPUS UOBD</span>
+      <img class="logo-mark" src="../kit/assets/logo-mark.svg" alt="GDG bracket mark">
+    </header>
+
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title" class="t-display bracketed">PARTY</h1>
+      <p class="footer-copy">UP TO 4 PLAYERS JOIN ON THEIR PHONES BY SCANNING A QR CODE, THEN BATTLE ON ONE BIG SCREEN.</p>
+    </section>
+
+    <div class="stack">
+      <div class="games">
+        <article class="card game">
+          <span class="pill pill--sm pill--filled-yellow" style="justify-self:start">GAME 1</span>
+          <h2 class="t-h2">TAP BATTLE</h2>
+          <p>Every tap fills your bar, and it drains when you stop. First to fill it wins. If time runs out, the fullest bar wins.</p>
+        </article>
+        <article class="card game">
+          <span class="pill pill--sm pill--filled-blue" style="justify-self:start">GAME 2</span>
+          <h2 class="t-h2">SNAKE BATTLE</h2>
+          <p>Your phone becomes a trackpad: slide to steer your snake on the big screen. Eat to grow. Crash and your body turns into food. Last snake left wins.</p>
+        </article>
+      </div>
+
+      <section class="card card--flat why" aria-labelledby="why-title">
+        <h2 id="why-title" class="t-h2 bracketed">WHY IT'S NOT ONLINE</h2>
+        <p>The phones and the big screen talk live through a small server on the booth laptop, and GitHub Pages can only host plain pages. So Party runs from the laptop at the event, not from this website. The code lives in the arcade repo.</p>
+        <div class="row">
+          <a class="btn btn--sm" href="https://github.com/UdayAhuja19/gdg-arcade#party-mode-tap-battle-and-snake-battle-4-player-games-in-progress">&lt;SETUP GUIDE&gt;</a>
+          <a class="btn btn--sm" href="https://github.com/UdayAhuja19/gdg-arcade/blob/main/HANDOFF.md">&lt;TEAM HANDOFF&gt;</a>
+        </div>
+      </section>
+
+      <section class="card card--flat" aria-labelledby="run-title">
+        <h2 id="run-title" class="t-h2 bracketed" style="margin-bottom:var(--space-5)">RUN IT AT THE BOOTH</h2>
+        <ol class="steps">
+          <li><div>On the booth laptop, get the arcade code and install it once (needs Node 22.9 or newer).
+<pre class="code">git clone https://github.com/UdayAhuja19/gdg-arcade.git
+cd gdg-arcade
+npm install</pre></div></li>
+          <li><div>Install the free Cloudflare tunnel once. No account needed.
+<pre class="code">brew install cloudflared</pre></div></li>
+          <li><div>Start Party. The tunnel gives the phones a public link, so they can join on any Wi-Fi or on mobile data.
+<pre class="code">npm run party</pre></div></li>
+          <li><div>Open <b>http://localhost:3101</b> on the big screen. Players scan the QR code with their phones and type a name.</div></li>
+          <li><div>Pick <b>TAP BATTLE</b> or <b>SNAKE BATTLE</b> under NEXT GAME, press <b>START</b>, and use <b>PLAY AGAIN</b> or <b>BACK TO LOBBY</b> between rounds.</div></li>
+        </ol>
+      </section>
+    </div>
+
+    <footer class="foot">
+      <p class="t-small">PROTOTYPE, RUNNING THROUGH A CLOUDFLARE TUNNEL. TRY IT WITH REAL PHONES BEFORE AN EVENT.</p>
+    </footer>
+  </main>
+</body>
+</html>

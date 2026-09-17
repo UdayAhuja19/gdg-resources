@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GDG Week Planner</title>
+  <link rel="icon" href="../kit/assets/logo-mark.svg">
+  <link rel="stylesheet" href="../kit/css/tokens.css">
+  <link rel="stylesheet" href="../kit/css/base.css">
+  <link rel="stylesheet" href="../kit/css/components.css">
+<style>
+  .wrap{display:grid;gap:var(--space-5);max-width:1280px}
+  .wrap > h1{text-align:center;margin-top:var(--space-5)}
+  .lede{margin:0 auto;text-align:center;max-width:70ch}
+  .foot{padding-block:0 var(--space-7)}
+  .panel{padding:var(--space-5);min-width:0}
+  .panel h2{margin:0 0 var(--space-4)}
+  .small{font-size:var(--small-size);line-height:1.5}
+  .cap{font-size:12px;font-weight:800;letter-spacing:.04em}
+
+  .controls{display:flex;flex-wrap:wrap;gap:var(--space-4) var(--space-6);align-items:end}
+  .ctl{display:grid;gap:var(--space-2)}
+  .seg{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+  .btn[aria-pressed="true"]{background:var(--yellow)}
+  select{font:inherit;font-size:14px;font-weight:800;text-transform:uppercase;color:var(--ink);background:var(--paper);border:var(--stroke) solid var(--ink);border-radius:var(--radius-pill);padding:9px 14px;max-width:100%}
+
+  .picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:var(--space-3)}
+  .pick{font:inherit;text-transform:uppercase;text-align:left;color:var(--ink);background:var(--paper);border:var(--stroke) solid var(--ink);border-radius:var(--radius-inner);padding:12px 14px;cursor:pointer;box-shadow:0 4px 0 var(--ink);display:grid;gap:4px;transition:translate var(--dur-fast) var(--ease-spring),box-shadow var(--dur-fast) var(--ease-spring)}
+  .pick:hover{translate:0 -2px;box-shadow:0 6px 0 var(--ink)}
+  .pick.active{background:var(--yellow)}
+  .pick .rank{font-size:12px;font-weight:800}
+  .pick .when{font-size:19px;font-weight:900;letter-spacing:-.01em;line-height:1.1}
+  .pick .pct{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:var(--space-5);align-items:start}
+  @media (max-width:980px){.layout{grid-template-columns:1fr}}
+  .side{display:grid;gap:var(--space-5)}
+
+  .scroll{overflow-x:auto;padding:4px}
+  .week{display:grid;grid-template-columns:62px repeat(5,minmax(96px,1fr));min-width:560px;border:var(--stroke) solid var(--ink);border-radius:var(--radius-inner);overflow:hidden;background:var(--paper)}
+  .corner{border-bottom:var(--stroke) solid var(--ink)}
+  .dayhead{padding:10px 6px;text-align:center;font-weight:900;font-size:15px;border-bottom:var(--stroke) solid var(--ink);border-left:2px solid var(--ink)}
+  .dayhead small{display:block;font-size:10px;font-weight:700;margin-top:2px}
+  .time{font-size:11px;font-weight:800;text-align:right;padding:0 8px;font-variant-numeric:tabular-nums;height:30px;line-height:1;transform:translateY(-6px)}
+  .time.half{color:transparent}
+  .cell{font:inherit;height:30px;border:0;border-left:2px solid var(--ink);border-top:1px solid rgb(17 17 17 / .18);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;cursor:pointer;color:var(--ink);padding:0}
+  .cell.hour{border-top:2px solid var(--ink)}
+  .cell.t-good{background:var(--green)}
+  .cell.t-ok{background:var(--yellow)}
+  .cell.t-bad{background:var(--red);color:var(--paper)}
+  .cell.t-free{background:var(--paper);color:var(--muted)}
+  .cell.closed{background:repeating-linear-gradient(135deg,var(--grid-line) 0 6px,var(--paper) 6px 12px);cursor:default;color:var(--muted)}
+  .cell.inpick{box-shadow:inset 0 0 0 3px var(--ink),inset 0 0 0 6px var(--paper)}
+  .cell.sel{box-shadow:inset 0 0 0 3px var(--blue),inset 0 0 0 6px var(--paper)}
+  .cell:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+  .closedtag{font-size:10px;background:var(--paper);padding:1px 6px;border:2px solid var(--muted);border-radius:999px}
+  .legend{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-4);margin-top:var(--space-4);align-items:center}
+  .legend span{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
+  .sw{width:16px;height:16px;border:2px solid var(--ink);border-radius:4px;display:inline-block}
+
+  .stat{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+  .busylist{display:grid;gap:6px;margin-top:12px}
+  .busylist li{display:flex;justify-content:space-between;gap:8px;font-size:13px;border-bottom:2px solid var(--grid-line);padding-bottom:6px}
+  .busylist b{font-weight:900}
+  .tag{font-size:10px;font-weight:800;border:2px solid var(--ink);border-radius:999px;padding:1px 7px;white-space:nowrap;align-self:start}
+  .tag.flex{background:var(--blue);color:var(--paper)}
+
+  .major{display:grid;gap:6px;padding-block:8px;border-top:2px solid var(--grid-line)}
+  .major:first-of-type{border-top:0}
+  .mname{font-size:12px;font-weight:800}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font:inherit;border:2px solid var(--ink);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:800;background:var(--green);color:var(--ink);cursor:pointer}
+  .chip[aria-pressed="false"]{background:var(--paper);color:var(--muted);text-decoration:line-through;border-color:var(--muted)}
+  .chip .f{font-size:9px;margin-left:4px;background:var(--blue);color:var(--paper);border-radius:999px;padding:0 5px}
+  .grouptools{display:flex;gap:var(--space-2);margin-bottom:6px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="page wrap">
+  <header class="topbar">
+    <a class="pill pill--sm" href="../">&lt; RESOURCES</a>
+    <span class="pill pill--header">GOOGLE DEVELOPERS GROUP ON CAMPUS UOBD</span>
+    <img class="logo-mark" src="../kit/assets/logo-mark.svg" alt="GDG bracket mark">
+  </header>
+  <h1 class="t-h1 bracketed">WEEK PLANNER</h1>
+  <p class="lede footer-copy">EVERY COLLECTED CLASS TIMETABLE ON ONE WEEK. EACH HALF-HOUR SHOWS THE SHARE OF STUDENTS WHO ARE FREE. PICK HOW LONG YOUR EVENT IS AND THE BEST SLOTS RISE TO THE TOP.</p>
+
+  <section class="card panel" aria-labelledby="picksTitle">
+    <div class="controls" style="margin-bottom:18px">
+      <div class="ctl">
+        <span class="cap">Event length</span>
+        <div class="seg" id="durSeg"></div>
+      </div>
+      <div class="ctl">
+        <span class="cap">Search window</span>
+        <div class="seg" id="winSeg"></div>
+      </div>
+    </div>
+    <h2 id="picksTitle" class="t-h2 bracketed">BEST SLOTS</h2>
+    <div class="picks" id="picks"></div>
+    <p class="small t-sentence" style="margin:12px 0 0">A slot's score is its <b>worst</b> half-hour, so everyone free at the start can stay to the end. Ties go to the higher average, then the earlier time.</p>
+  </section>
+
+  <div class="layout">
+    <section class="card panel" aria-labelledby="weekTitle">
+      <div class="controls" style="justify-content:space-between;margin-bottom:14px">
+        <h2 id="weekTitle" class="t-h2 bracketed" style="margin:0">THE WEEK</h2>
+        <div class="ctl">
+          <label class="cap" for="viewSel">Showing</label>
+          <select id="viewSel"></select>
+        </div>
+      </div>
+      <div class="scroll"><div class="week" id="week" role="grid"></div></div>
+      <div class="legend" id="legend"></div>
+    </section>
+
+    <div class="side">
+      <section class="card panel" aria-live="polite" id="detail"></section>
+      <section class="card panel" aria-labelledby="groupsTitle">
+        <h2 id="groupsTitle" class="t-h2 bracketed">WHO COUNTS</h2>
+        <p class="small t-sentence" style="margin:0 0 10px">Tap a year to leave it out. <span class="tag flex">flex</span> Year 3 groups with self-picked modules count at half weight.</p>
+        <div class="grouptools">
+          <button class="btn btn--sm" id="allOn" type="button">ALL</button>
+          <button class="btn btn--sm" id="allOff" type="button">NONE</button>
+        </div>
+        <div id="groups"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<footer class="page foot">
+  <p class="small t-sentence">Timetables live in <b>week-planner/timetables.js</b>. Edit that file on GitHub to add or fix a group; the page updates on the next deploy.</p>
+</footer>
+
+<script src="timetables.js"></script>
+<script>
+const DAYS=['Mon','Tue','Wed','Thu','Fri'];
+const DAY_NAMES={Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday'};
+const START=8, END=19, STEP=0.5;
+const DAY_END={Mon:19,Tue:19,Wed:19,Thu:19,Fri:13}; // Friday stops at 1 PM for Jummah
+const DURS=[{h:.5,l:'30 min'},{h:1,l:'1 hr'},{h:1.5,l:'1.5 hr'},{h:2,l:'2 hr'}];
+const WINS=[{id:'all',l:'Any time',s:8,e:19},{id:'day',l:'Before 6 PM',s:8,e:18},{id:'lunch',l:'11 AM – 3 PM',s:11,e:15}];
+const weight=g=>g.flexible?.5:1;
+const busyAt=(g,d,h)=>g.busy.some(([dd,s,e])=>dd===d&&h>=s&&h<e);
+const fmt=h=>{const hh=Math.floor(h),m=h%1?':30':'';const ap=hh<12?'AM':'PM';return (hh%12||12)+m+' '+ap};
+const label=g=>g.major+' '+g.year;
+
+const state={dur:1,win:'all',view:'all',sel:null,pick:0,included:new Set(GROUPS.map(g=>g.id))};
+try{const s=JSON.parse(localStorage.getItem('gdg-week-planner')||'{}');if(s.dur)state.dur=s.dur;if(s.win)state.win=s.win;if(Array.isArray(s.excluded))s.excluded.forEach(id=>state.included.delete(id));}catch(e){}
+function save(){try{localStorage.setItem('gdg-week-planner',JSON.stringify({dur:state.dur,win:state.win,excluded:GROUPS.filter(g=>!state.included.has(g.id)).map(g=>g.id)}))}catch(e){}}
+
+function slots(){const r=[];for(let h=START;h<END;h+=STEP)r.push(h);return r}
+function score(d,h){
+  const act=GROUPS.filter(g=>state.included.has(g.id));
+  const total=act.reduce((s,g)=>s+weight(g),0);
+  let free=0;const busy=[];
+  act.forEach(g=>{if(busyAt(g,d,h))busy.push(g);else free+=weight(g)});
+  return {pct: total? Math.round(100*free/total):null, busy, total, freeGroups:act.length-busy.length, groups:act.length};
+}
+function tier(p){return p==null?'t-free':p>=80?'t-good':p>=60?'t-ok':'t-bad'}
+
+function bestSlots(){
+  const w=WINS.find(x=>x.id===state.win), n=state.dur/STEP, cands=[];
+  DAYS.forEach(d=>{
+    const end=Math.min(DAY_END[d],w.e);
+    for(let h=w.s;h+state.dur<=end;h+=STEP){
+      const ps=[];for(let i=0;i<n;i++)ps.push(score(d,h+i*STEP).pct);
+      if(ps.some(p=>p==null))return;
+      cands.push({d,h,min:Math.min(...ps),avg:ps.reduce((a,b)=>a+b,0)/n});
+    }
+  });
+  cands.sort((a,b)=>b.min-a.min||b.avg-a.avg||DAYS.indexOf(a.d)-DAYS.indexOf(b.d)||a.h-b.h);
+  const out=[];
+  for(const c of cands){
+    if(out.some(o=>o.d===c.d&&c.h<o.h+state.dur&&o.h<c.h+state.dur))continue; // no overlapping picks
+    if(out.filter(o=>o.d===c.d).length>=2)continue; // spread across the week
+    out.push(c);if(out.length===6)break;
+  }
+  return out;
+}
+
+function renderControls(){
+  const dur=document.getElementById('durSeg');dur.innerHTML='';
+  DURS.forEach(x=>{const b=document.createElement('button');b.type='button';b.className='btn btn--sm';b.textContent=x.l;b.setAttribute('aria-pressed',state.dur===x.h);
+    b.onclick=()=>{state.dur=x.h;state.pick=0;state.sel=null;save();render()};dur.appendChild(b)});
+  const win=document.getElementById('winSeg');win.innerHTML='';
+  WINS.forEach(x=>{const b=document.createElement('button');b.type='button';b.className='btn btn--sm';b.textContent=x.l;b.setAttribute('aria-pressed',state.win===x.id);
+    b.onclick=()=>{state.win=x.id;state.pick=0;state.sel=null;save();render()};win.appendChild(b)});
+}
+
+let picks=[];
+function renderPicks(){
+  picks=bestSlots();
+  const el=document.getElementById('picks');el.innerHTML='';
+  if(!picks.length){el.innerHTML='<p class="small">NO SLOT FITS. TRY A SHORTER EVENT OR A WIDER WINDOW.</p>';return}
+  picks.forEach((p,i)=>{
+    const b=document.createElement('button');b.type='button';b.className='pick'+(i===state.pick&&!state.sel?' active':'');
+    b.innerHTML=`<span class="rank">#${i+1}</span><span class="when">${p.d} ${fmt(p.h)} – ${fmt(p.h+state.dur)}</span><span class="pct">${p.min}% free the whole time</span>`;
+    b.onclick=()=>{state.pick=i;state.sel=null;render()};
+    el.appendChild(b);
+  });
+}
+
+function renderWeek(){
+  const w=document.getElementById('week');w.innerHTML='';
+  const single=state.view!=='all'?GROUPS.find(g=>g.id===state.view):null;
+  const pk=!state.sel&&picks[state.pick];
+  w.appendChild(Object.assign(document.createElement('div'),{className:'corner'}));
+  DAYS.forEach(d=>{
+    const h=document.createElement('div');h.className='dayhead';
+    let sub='';
+    if(!single){const ps=slots().filter(x=>x<DAY_END[d]).map(x=>score(d,x).pct);sub=`avg ${Math.round(ps.reduce((a,b)=>a+b,0)/ps.length)||0}% free`}
+    else sub=d==='Fri'?'until 1 PM':'';
+    h.innerHTML=`${d}<small>${sub}</small>`;w.appendChild(h);
+  });
+  slots().forEach(h=>{
+    const t=document.createElement('div');t.className='time'+(h%1?' half':'');t.textContent=fmt(h);w.appendChild(t);
+    DAYS.forEach(d=>{
+      const c=document.createElement('button');c.type='button';
+      const hour=h%1===0?' hour':'';
+      if(h>=DAY_END[d]){
+        c.className='cell closed'+hour;c.tabIndex=-1;c.disabled=true;
+        if(h===DAY_END[d])c.innerHTML='<span class="closedtag">Jummah</span>';
+        w.appendChild(c);return;
+      }
+      if(single){
+        const b=busyAt(single,d,h);
+        c.className='cell'+hour+(b?' t-bad':' t-good');c.textContent=b&&(h%1===0||!busyAt(single,d,h-STEP))?'CLASS':'';
+        c.setAttribute('aria-label',`${d} ${fmt(h)}: ${b?'in class':'free'}`);
+      }else{
+        const s=score(d,h);
+        c.className='cell'+hour+' '+tier(s.pct);c.textContent=s.pct==null?'–':s.pct+'%';
+        c.setAttribute('aria-label',`${d} ${fmt(h)}: ${s.pct}% free`);
+      }
+      if(pk&&pk.d===d&&h>=pk.h&&h<pk.h+state.dur)c.classList.add('inpick');
+      if(state.sel&&state.sel.d===d&&state.sel.h===h)c.classList.add('sel');
+      c.onclick=()=>{state.sel={d,h};render()};
+      w.appendChild(c);
+    });
+  });
+  document.getElementById('legend').innerHTML=single
+    ? '<span><i class="sw" style="background:var(--red)"></i>In class</span><span><i class="sw" style="background:var(--green)"></i>Free</span>'
+    : '<span><i class="sw" style="background:var(--green)"></i>80%+ free</span><span><i class="sw" style="background:var(--yellow)"></i>60–79%</span><span><i class="sw" style="background:var(--red)"></i>Under 60%</span><span><i class="sw" style="border-width:3px"></i>Best slot</span><span><i class="sw" style="background:repeating-linear-gradient(135deg,var(--off) 0 3px,var(--paper) 3px 6px)"></i>No events</span>';
+}
+
+function renderDetail(){
+  const el=document.getElementById('detail');
+  let d,h,len,title;
+  if(state.sel){({d,h}=state.sel);len=STEP;title='THIS HALF-HOUR'}
+  else if(picks[state.pick]){({d,h}=picks[state.pick]);len=state.dur;title='BEST SLOT #'+(state.pick+1)}
+  else{el.innerHTML='<h2 class="t-h2">NOTHING SELECTED</h2><p class="small">TAP A SLOT ON THE WEEK.</p>';return}
+  // Anyone busy at any point in the span misses part of it
+  const act=GROUPS.filter(g=>state.included.has(g.id));
+  const busy=[];
+  for(let x=h;x<h+len;x+=STEP)act.forEach(g=>{if(busyAt(g,d,x)&&!busy.includes(g))busy.push(g)});
+  const total=act.reduce((s,g)=>s+weight(g),0), free=act.filter(g=>!busy.includes(g)).reduce((s,g)=>s+weight(g),0);
+  const pct=total?Math.round(100*free/total):0;
+  el.innerHTML=`<h2 class="t-h2 bracketed">${title}</h2>
+    <div class="cap" style="margin-bottom:6px">${DAY_NAMES[d]} · ${fmt(h)} – ${fmt(h+len)}</div>
+    <div class="stat">${pct}%</div>
+    <p class="small" style="margin:6px 0 0">free for the whole time · ${act.length-busy.length} of ${act.length} groups clear</p>
+    ${busy.length?`<div class="cap" style="margin-top:16px">In class (${busy.length})</div><ul class="busylist">${busy.map(g=>`<li><span><b>${g.year}</b> ${g.major}</span>${g.flexible?'<span class="tag flex">flex</span>':''}</li>`).join('')}</ul>`
+      :'<p class="cap" style="margin-top:16px"><span class="pill pill--sm pill--filled-green">EVERYONE IS FREE</span></p>'}
+    ${state.sel?'<button class="btn btn--sm" type="button" id="backPick" style="margin-top:14px">&lt;Back to best slot&gt;</button>':''}`;
+  const bb=document.getElementById('backPick');if(bb)bb.onclick=()=>{state.sel=null;render()};
+}
+
+function renderGroups(){
+  const el=document.getElementById('groups');el.innerHTML='';
+  const by={};GROUPS.forEach(g=>(by[g.major]=by[g.major]||[]).push(g));
+  Object.entries(by).forEach(([m,gs])=>{
+    const div=document.createElement('div');div.className='major';
+    div.innerHTML=`<div class="mname">${m}</div>`;
+    const chips=document.createElement('div');chips.className='chips';
+    gs.forEach(g=>{
+      const c=document.createElement('button');c.type='button';c.className='chip';c.setAttribute('aria-pressed',state.included.has(g.id));
+      c.setAttribute('aria-label',`${label(g)}${g.flexible?' (flexible)':''}`);
+      c.innerHTML=g.year+(g.flexible?'<span class="f">FLEX</span>':'');
+      c.onclick=()=>{state.included.has(g.id)?state.included.delete(g.id):state.included.add(g.id);state.pick=0;save();render()};
+      chips.appendChild(c);
+    });
+    div.appendChild(chips);el.appendChild(div);
+  });
+}
+
+function buildViewSelect(){
+  const s=document.getElementById('viewSel');
+  s.innerHTML='<option value="all">Everyone (overlap)</option>';
+  const by={};GROUPS.forEach(g=>(by[g.major]=by[g.major]||[]).push(g));
+  Object.entries(by).forEach(([m,gs])=>{const og=document.createElement('optgroup');og.label=m;
+    gs.forEach(g=>og.appendChild(new Option(g.year+(g.flexible?' (flex)':'')+' timetable',g.id)));s.appendChild(og)});
+  s.onchange=()=>{state.view=s.value;renderWeek()};
+}
+
+function render(){renderControls();renderPicks();renderWeek();renderDetail();renderGroups()}
+document.getElementById('allOn').onclick=()=>{state.included=new Set(GROUPS.map(g=>g.id));state.pick=0;save();render()};
+document.getElementById('allOff').onclick=()=>{state.included=new Set();state.pick=0;save();render()};
+buildViewSelect();render();
+</script>
+
+</body>
+</html>

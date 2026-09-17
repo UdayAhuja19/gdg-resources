@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GDG UOBD Resources</title>
+  <meta name="description" content="Shared tools and brand files for the GDG on Campus UOBD team.">
+  <link rel="icon" href="kit/assets/logo-mark.svg">
+  <link rel="stylesheet" href="kit/css/tokens.css">
+  <link rel="stylesheet" href="kit/css/base.css">
+  <link rel="stylesheet" href="kit/css/components.css">
+  <style>
+    .hero {
+      display: grid;
+      justify-items: center;
+      gap: var(--space-5);
+      padding-block: var(--space-8) var(--space-7);
+      text-align: center;
+    }
+
+    .hero .t-display {
+      font-size: clamp(48px, 12vw, 160px);
+    }
+
+    .shelf {
+      display: grid;
+      gap: var(--space-5);
+      padding-block: var(--space-6);
+    }
+
+    .shelf__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding-bottom: var(--space-3);
+      border-bottom: var(--stroke) solid var(--ink);
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-6) var(--space-5);
+      isolation: isolate;
+    }
+
+    .tile {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: var(--space-3);
+      color: inherit;
+      text-decoration: none;
+      transition:
+        translate var(--dur-fast) var(--ease-spring),
+        box-shadow var(--dur-fast) var(--ease-spring);
+    }
+
+    .tile:hover {
+      translate: 0 -3px;
+      box-shadow: 0 var(--shadow-hover) 0 var(--ink);
+    }
+
+    .tile:hover .tile__go {
+      background: var(--yellow);
+    }
+
+    .tile .card__peek {
+      width: 84px;
+      height: 84px;
+      top: -34px;
+      right: -26px;
+    }
+
+    .tile__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .tile__kind {
+      font-size: var(--small-size);
+      font-weight: 700;
+    }
+
+    .tile__desc {
+      text-transform: none;
+      line-height: 1.5;
+    }
+
+    .tile__go {
+      justify-self: start;
+      pointer-events: none;
+    }
+
+    .foot {
+      display: grid;
+      gap: var(--space-3);
+      padding-block: var(--space-7) var(--space-5);
+    }
+
+    .foot a {
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <span></span>
+      <span class="pill pill--header">GOOGLE DEVELOPERS GROUP ON CAMPUS UOBD</span>
+      <img class="logo-mark" src="kit/assets/logo-mark.svg" alt="GDG bracket mark">
+    </header>
+
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title" class="t-display bracketed">RESOURCES</h1>
+      <p class="footer-copy">EVERYTHING THE TEAM HAS MADE, IN ONE PLACE. PICK ONE TO OPEN IT.</p>
+    </section>
+
+    <section class="shelf" aria-labelledby="brand-title">
+      <div class="shelf__head">
+        <h2 id="brand-title" class="t-h2 bracketed">BRAND</h2>
+        <span class="t-small">FOR POSTS, SLIDES, SCREENS AND WEBSITES</span>
+      </div>
+      <div class="tiles">
+        <a class="card tile" href="design/">
+          <svg class="shape shape--yellow card__peek" aria-hidden="true"><use href="kit/assets/shapes.svg#blob"/></svg>
+          <div class="tile__top"><span class="pill pill--sm pill--filled-yellow">PAGE</span><span class="tile__kind">LIVE SHEET</span></div>
+          <h3 class="t-h2">DESIGN SYSTEM</h3>
+          <p class="tile__desc">Every rule shown with real examples: colours, type, pills, buttons, cards, shapes, post and slide layouts, voice, and what not to do.</p>
+          <span class="btn btn--sm tile__go">&lt;OPEN&gt;</span>
+        </a>
+        <a class="card tile" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/design/DESIGN.md">
+          <svg class="shape shape--blue card__peek" aria-hidden="true"><use href="kit/assets/shapes.svg#flower"/></svg>
+          <div class="tile__top"><span class="pill pill--sm pill--filled-blue">FILE</span><span class="tile__kind">MARKDOWN</span></div>
+          <h3 class="t-h2">DESIGN.MD</h3>
+          <p class="tile__desc">The same rules as a text file. Drop it into a project, hand it to a designer, or give it to an AI assistant so what it makes stays on brand.</p>
+          <span class="btn btn--sm tile__go">&lt;READ&gt;</span>
+        </a>
+        <a class="card tile" href="design/starter.html">
+          <svg class="shape shape--green card__peek" aria-hidden="true"><use href="kit/assets/shapes.svg#triangle"/></svg>
+          <div class="tile__top"><span class="pill pill--sm pill--filled-green">TEMPLATE</span><span class="tile__kind">HTML</span></div>
+          <h3 class="t-h2">STARTER PAGE</h3>
+          <p class="tile__desc">A blank page already wired to the brand kit: header pill, big bracketed headline, a button and two shapes. Copy it and start building.</p>
+          <span class="btn btn--sm tile__go">&lt;OPEN&gt;</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" aria-labelledby="plan-title">
+      <div class="shelf__head">
+        <h2 id="plan-title" class="t-h2 bracketed">PLANNING</h2>
+        <span class="t-small">FOR PICKING WHEN AND WHERE</span>
+      </div>
+      <div class="tiles">
+        <a class="card tile" href="week-planner/">
+          <svg class="shape shape--red card__peek" aria-hidden="true"><use href="kit/assets/shapes.svg#circle"/></svg>
+          <div class="tile__top"><span class="pill pill--sm pill--filled-red">TOOL</span><span class="tile__kind">30 TIMETABLES</span></div>
+          <h3 class="t-h2">WEEK PLANNER</h3>
+          <p class="tile__desc">Every collected class timetable on one week. See what share of students is free each half-hour, and get the best slots for an event of any length.</p>
+          <span class="btn btn--sm tile__go">&lt;OPEN&gt;</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p class="t-small">MADE SOMETHING THE TEAM SHOULD HAVE? ADD IT TO THE REPO AND LIST IT HERE.</p>
+      <p class="t-small"><a href="https://github.com/UdayAhuja19/gdg-resources">GITHUB REPO</a></p>
+    </footer>
+  </main>
+</body>
+</html>

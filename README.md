@@ -9,7 +9,7 @@ Shared tools and brand files for the team, live at **https://udayahuja19.github.
 | Starter page | [`design/starter.html`](design/starter.html) | A blank page already using the brand kit |
 | Week planner | [`week-planner/`](week-planner/index.html) | Finds event times that suit the most students' class timetables |
 | Arcade | [gdg-arcade demo](https://udayahuja19.github.io/gdg-arcade/) | The single-player booth games (online scores stay on each device) |
-| Party | [`party/`](party/index.html) | The 4-player phone games (prototype) and how to run them from the booth laptop through a Cloudflare tunnel |
+| Party | `http://localhost:3101` | Opens the 4-player party big screen on the laptop running `npm run party` (prototype, Cloudflare tunnel) |
 
 ## The brand kit
 

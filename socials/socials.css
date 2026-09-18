@@ -1,0 +1,206 @@
+/* The socials page: a link list for phones, reached from the QR code on the party big
+   screen. It deliberately has no link back to the rest of the resources site.
+   One column, big thumb-sized buttons, the post's collage below. */
+
+.socials {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: max(var(--space-5), env(safe-area-inset-top)) var(--space-4) max(var(--space-5), env(safe-area-inset-bottom));
+  text-align: center;
+  isolation: isolate;
+  /* The shapes hang off the edges; clip them so the page never scrolls sideways */
+  overflow-x: clip;
+}
+
+/* Flat brand shapes tucked behind the edges */
+.socials__shape {
+  position: absolute;
+  z-index: -1;
+}
+
+.socials__shape--flower {
+  top: 8px;
+  right: -34px;
+  width: 104px;
+  height: 104px;
+}
+
+.socials__shape--blob {
+  top: 214px;
+  left: -46px;
+  width: 92px;
+  height: 92px;
+}
+
+.socials__shape--circle {
+  top: 452px;
+  right: -40px;
+  width: 72px;
+  height: 72px;
+}
+
+.socials__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.socials__logo {
+  width: 84px;
+  height: auto;
+}
+
+/* The club pill shrinks to stay on one line, and only wraps on the narrowest phones */
+.socials__club {
+  max-width: 100%;
+  padding-inline: 1em;
+  font-size: clamp(10px, 2.95vw, 15px);
+  white-space: normal;
+  line-height: 1.15;
+}
+
+.socials__title {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-5);
+  font-size: min(15.5vw, 76px);
+  font-weight: 900;
+  letter-spacing: var(--display-tracking);
+  line-height: 0.9;
+  white-space: nowrap;
+}
+
+.socials__intro {
+  max-width: 34ch;
+  margin-top: var(--space-4);
+  text-wrap: balance;
+  font-size: var(--body-size);
+  font-weight: 600;
+}
+
+.socials__links {
+  display: grid;
+  gap: var(--space-4);
+  width: 100%;
+  margin-top: var(--space-5);
+}
+
+/* A link: a full-width sticker button with an icon disc, two lines of text and an arrow */
+.link-btn {
+  justify-content: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 72px;
+  padding: 10px 18px 10px 10px;
+  text-align: left;
+  white-space: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.link-btn__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--stroke-thin) solid var(--ink);
+  border-radius: 50%;
+}
+
+.link-btn__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* The white letters cut out of LinkedIn's ink square */
+.link-btn__knockout {
+  fill: var(--paper);
+}
+
+.link-btn__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.link-btn__text b {
+  font-size: min(19px, 5.3vw);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.link-btn__text small {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: var(--body-tracking);
+  line-height: 1.2;
+}
+
+.link-btn__arrow {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  transition: translate var(--dur-fast) var(--ease-spring);
+}
+
+.link-btn:hover .link-btn__arrow {
+  translate: 4px 0;
+}
+
+/* The post's collage: tilted pills with shapes overlapping them */
+.socials__collage {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  width: 100%;
+  margin-top: auto;
+  padding: var(--space-6) var(--space-4) var(--space-5);
+}
+
+.socials__collage .pill {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.socials__shape--triangle {
+  bottom: 6px;
+  left: -8px;
+  width: 64px;
+  height: 64px;
+}
+
+.socials__shape--half {
+  top: 26px;
+  right: 4px;
+  width: 70px;
+  height: 70px;
+  rotate: 18deg;
+}
+
+.socials__foot {
+  text-wrap: balance;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-btn:hover .link-btn__arrow {
+    translate: none;
+  }
+}

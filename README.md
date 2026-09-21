@@ -8,6 +8,7 @@ Shared tools and brand files for the team, live at **https://udayahuja19.github.
 | DESIGN.md | [`design/DESIGN.md`](design/DESIGN.md) | The same rules as a text file for designers, projects and AI assistants |
 | Starter page | [`design/starter.html`](design/starter.html) | A blank page already using the brand kit |
 | Socials | [`socials/`](socials/index.html) | The club's WhatsApp group, Instagram and LinkedIn on one phone page, with no links back into this site. Share this link; the QR code (`socials/GDG-UOBD-socials-QR.png`, `.svg`) points here |
+| Club fair poster | [`poster/`](poster/index.html) | The A5 handout with what we do and the socials QR code. `poster/GDG-UOBD-club-fair-A5.pdf` is the file to print (100%, backgrounds on) |
 | Week planner | [`week-planner/`](week-planner/index.html) | Finds event times that suit the most students' class timetables |
 | Arcade | [gdg-arcade demo](https://udayahuja19.github.io/gdg-arcade/) | The single-player booth games (online scores stay on each device) |
 | Party | [`party/`](party/index.html) | How to run the 4-player phone games (prototype) from a laptop through a Cloudflare tunnel |

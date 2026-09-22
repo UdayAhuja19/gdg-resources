@@ -12,6 +12,7 @@ Shared tools and brand files for the team, live at **https://udayahuja19.github.
 | Week planner | [`week-planner/`](week-planner/index.html) | Finds event times that suit the most students' class timetables |
 | Arcade | [gdg-arcade demo](https://udayahuja19.github.io/gdg-arcade/) | The single-player booth games (online scores stay on each device) |
 | Party | [`party/`](party/index.html) | How to run the 4-player phone games (prototype) from a laptop through a Cloudflare tunnel |
+| Attract screen | [`attract/`](attract/index.html) | The looping booth-TV screen (games, the final, socials QR) with stand-in names. It's a copy of `public/attract.html` in the gdg-arcade repo, which shows the real top 3 at `/attract`; recopy it if that one changes |
 
 ## The brand kit
 

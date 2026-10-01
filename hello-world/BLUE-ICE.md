@@ -22,11 +22,11 @@ The event: Tue 06 Oct 2026, 16:00 to 18:00, room 0201 Innovation Lounge, UOBD. R
 
 ## Content fundamentals
 
-- **Voice:** short, warm, a little dry. We talk to students as *you* and about the club as *we*. Jokes come from the ice idea, never at anyone's expense: `ZERO AWKWARD`, `ON THE ICE`, `<BREAK THE ICE>`.
+- **Voice:** short, warm, a little dry. We talk to students as *you* and about the club as *we*. Jokes come from the ice idea, never at anyone's expense: `ON THE ICE`, `<BREAK THE ICE>`, `<THE ICE IS BROKEN>`.
 - **Casing:** everything is in capitals except two things. The event name is always lowercase with its punctuation, exactly `hello, world!`, because it is a line of code. Running text on the website (`body`) is in sentence case.
 - **Brackets:** the club's code brackets survive from the main brand. The one display line on a layout sits inside `< >`: `<BREAK THE ICE>`, `<SEE YOU THERE>`, `<ROUND 2>`.
 - **Code as a sign-off:** a footer may end with `print("hello, world!")` in `mono`.
-- **Facts are terse:** `TUE 06 OCT`, `16:00 — 18:00`, `0201 INNOVATION LOUNGE, UOBD`. Use the 24-hour clock, an em dash between times, and name the room by number first.
+- **Facts are terse:** `TUE 06 OCT`, `16:00 — 18:00`, `INNOVATION LOUNGE`. Use the 24-hour clock and an em dash between times. Name the place by its name and put the room number on the second line: `ROOM 0201, UOBD`.
 - **No emoji** anywhere, on posters, the site or captions.
 
 ## Colour
@@ -236,7 +236,7 @@ Load `blue-ice.css`, then `blue-ice.js`. Every factory returns a DOM element to 
 const mark = BlueIce.Wordmark({ width: 1072, bleed: true }); // the cracked name; mark.impact = {x, y}
 BlueIce.Button({ label: "<RSVP>" });                        // variant: "outline" for the second action
 BlueIce.Tag("PICTIONARY");                                  // wrap several in <div class="bi-tags">
-BlueIce.FactGrid([{ label: "DATE", value: "TUE 06 OCT", note: "2026" }, …]);
+BlueIce.FactGrid([{ label: "DATE", value: "TUE 06 OCT", note: "2026" }, …]); // columns 3 : 4 : 5, values never wrap
 BlueIce.Ruler({ ticks: 48, every: 8 });
 BlueIce.Annotation({ label: "FIG. 1  POINT OF IMPACT" });
 ```

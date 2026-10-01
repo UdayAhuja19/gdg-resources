@@ -204,9 +204,11 @@ Promise.all([document.fonts.load('900 100px "Archivo"'), document.fonts.load('80
     const x = M + s * measure / 48;
     el("line", { x1: x, x2: x, y1: gy, y2: gy + (s % 8 === 0 ? 12 : 6), stroke: "#F3F8FF", "stroke-width": 1 }, ch);
   }
-  const col = measure / 3;
-  [["DATE", "TUE 06 OCT", "2026"], ["TIME", "16:00 — 18:00", "ZERO AWKWARD"], ["PLACE", "0201 INNOVATION", "LOUNGE, UOBD"]].forEach(([k, a, b], c) => {
-    const x = M + c * col;
+  // columns sized to their facts (3 : 4 : 5) so INNOVATION LOUNGE stays on one line
+  const CG = 24, unit = (measure - 2 * CG) / 12;
+  const colX = [M, M + 3 * unit + CG, M + 7 * unit + 2 * CG];
+  [["DATE", "TUE 06 OCT", "2026"], ["TIME", "16:00 — 18:00", "SNACKS THE WHOLE TIME"], ["PLACE", "INNOVATION LOUNGE", "ROOM 0201, UOBD"]].forEach(([k, a, b], c) => {
+    const x = colX[c];
     el("text", { class: "label", x, y: gy + 46 }, ch, k);
     el("text", { class: "info", x, y: gy + 92, "font-size": 36 }, ch, a);
     el("text", { class: "info-l", x, y: gy + 126, "font-size": 24 }, ch, b);

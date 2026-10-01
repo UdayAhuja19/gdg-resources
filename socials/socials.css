@@ -122,6 +122,12 @@
   height: 26px;
 }
 
+/* The club's own bracket mark, for the chapter link (it's wider than tall) */
+.link-btn__mark {
+  width: 32px;
+  height: auto;
+}
+
 /* The white letters cut out of LinkedIn's ink square */
 .link-btn__knockout {
   fill: var(--paper);

@@ -207,7 +207,7 @@ Promise.all([document.fonts.load('900 100px "Archivo"'), document.fonts.load('80
   // columns sized to their facts (3 : 4 : 5) so INNOVATION LOUNGE stays on one line
   const CG = 24, unit = (measure - 2 * CG) / 12;
   const colX = [M, M + 3 * unit + CG, M + 7 * unit + 2 * CG];
-  [["DATE", "TUE 06 OCT", "2026"], ["TIME", "16:00 — 18:00", "SNACKS THE WHOLE TIME"], ["PLACE", "INNOVATION LOUNGE", "ROOM 0201, UOBD"]].forEach(([k, a, b], c) => {
+  [["DATE", "TUE 06 OCT", "2026"], ["TIME", "16:00 — 18:00", "DROP IN ANY TIME"], ["PLACE", "INNOVATION LOUNGE", "ROOM 0201, UOBD"]].forEach(([k, a, b], c) => {
     const x = colX[c];
     el("text", { class: "label", x, y: gy + 46 }, ch, k);
     el("text", { class: "info", x, y: gy + 92, "font-size": 36 }, ch, a);

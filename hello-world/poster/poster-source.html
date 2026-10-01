@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>hello, world! poster</title>
+<style>
+  @font-face { font-family: "Archivo"; src: url("../../kit/fonts/archivo-latin-wdth-normal.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; }
+  @font-face { font-family: "DM Mono"; src: url("../fonts/DMMono-Regular.ttf") format("truetype"); font-weight: 400; }
+  @page { size: 1200px 1697px; margin: 0; }
+  html, body { margin: 0; padding: 0; background: #0A1B66; }
+  svg { display: block; width: 1200px; height: 1697px; }
+  .mono { font-family: "DM Mono", monospace; font-size: 15px; letter-spacing: 0.16em; fill: #DCE9FF; }
+  .mono-s { font-family: "DM Mono", monospace; font-size: 12px; letter-spacing: 0.18em; fill: #B8CEFF; }
+  .label { font-family: "DM Mono", monospace; font-size: 13px; letter-spacing: 0.2em; fill: #B8CEFF; }
+  .title { font-family: "Archivo"; font-weight: 900; font-stretch: 82%; letter-spacing: -0.05em; fill: #F3F8FF; }
+  .big { font-family: "Archivo"; font-weight: 900; font-stretch: 112%; letter-spacing: -0.02em; fill: #F3F8FF; }
+  .info { font-family: "Archivo"; font-weight: 800; font-stretch: 100%; letter-spacing: -0.01em; fill: #F3F8FF; }
+  .info-l { font-family: "Archivo"; font-weight: 500; font-stretch: 100%; letter-spacing: 0.01em; fill: #CFE0FF; }
+  .tag { font-family: "Archivo"; font-weight: 700; font-stretch: 100%; letter-spacing: 0.02em; fill: #F3F8FF; }
+</style>
+</head>
+<body>
+<svg id="poster" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1697">
+  <defs>
+    <filter id="frost" x="-20%" y="-30%" width="140%" height="160%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.86  0 0 0 0 0.92  0 0 0 0 1  0 0 0 2.4 -1.25"/>
+    </filter>
+    <filter id="mottle" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.0035 0.006" numOctaves="4" seed="19"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.04  0 0 0 0 0.10  0 0 0 0 0.42  0 0 0 1.6 -0.62"/>
+    </filter>
+    <radialGradient id="bloom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7FB2FF" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#3C63F0" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#1E3FD9" stop-opacity="0"/>
+    </radialGradient>
+    <g id="titleText"></g>
+  </defs>
+
+  <rect width="1200" height="1697" fill="#1E3FD9"/>
+  <g id="shards"></g>
+  <rect width="1200" height="1697" filter="url(#mottle)" opacity="0.55"/>
+  <circle id="bloomDot" r="620" fill="url(#bloom)"/>
+  <use href="#titleText" filter="url(#frost)" opacity="0.42"/>
+  <g id="textShards"></g>
+  <g id="cracks"></g>
+  <g id="chrome"></g>
+  <rect width="1200" height="1697" filter="url(#grain)" opacity="0.16" style="mix-blend-mode:screen"/>
+</svg>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const W = 1200, H = 1697, M = 64;
+const $ = (id) => document.getElementById(id);
+function el(tag, attrs = {}, parent, text) {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text != null) n.textContent = text;
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+Promise.all([document.fonts.load('900 100px "Archivo"'), document.fonts.load('800 100px "Archivo"'), document.fonts.load('500 100px "Archivo"'), document.fonts.load('15px "DM Mono"')]).then(() => {
+  const defs = document.querySelector("defs");
+  const titleG = $("titleText");
+
+  // ---- Title: fit "hello," / "world!" to the measure ----
+  const measure = W - 2 * M;
+  const t1 = el("text", { class: "title", x: M, "font-size": 100 }, titleG, "hello,");
+  const t2 = el("text", { class: "title", x: M, "font-size": 100 }, titleG, "world!");
+  const scratch = el("g", {}, $("poster"));
+  const probe = el("text", { class: "title", "font-size": 100 }, scratch, "world!");
+  const wide = Math.max(probe.getBBox().width, (probe.textContent = "hello,", probe.getBBox().width));
+  scratch.remove();
+  const fs = Math.floor(100 * measure / wide);
+  const top = 214;
+  const y1 = top + Math.round(fs * 0.735);
+  const y2 = y1 + Math.round(fs * 0.86);
+  for (const [t, y] of [[t1, y1], [t2, y2]]) { t.setAttribute("font-size", fs); t.setAttribute("y", y); t.setAttribute("x", M - fs * 0.035); }
+
+  // the comma is the point of impact
+  const comma = t1.getExtentOfChar(5);
+  const P = { x: comma.x + comma.width * 0.5, y: comma.y + comma.height * 0.70 };
+  $("bloomDot").setAttribute("cx", P.x); $("bloomDot").setAttribute("cy", P.y);
+
+  // ---- Fracture: radial rays + broken concentric rings, like struck ice ----
+  const R = rng(20261006);
+  const RAYS = 24;
+  const angles = [];
+  for (let i = 0; i < RAYS; i++) angles.push((i + 0.1 + R() * 0.8) / RAYS * Math.PI * 2);
+  const radii = [0, 16, 38, 70, 115, 178, 262, 380, 545, 780, 1150, 2600];
+  const pt = [];
+  for (let k = 0; k < radii.length; k++) {
+    pt[k] = [];
+    for (let i = 0; i < RAYS; i++) {
+      if (k === 0) { pt[k][i] = { x: P.x, y: P.y }; continue; }
+      const r = radii[k] * (0.82 + R() * 0.36);
+      const a = angles[i] + (R() - 0.5) * 0.06;
+      pt[k][i] = { x: P.x + Math.cos(a) * r, y: P.y + Math.sin(a) * r };
+    }
+  }
+  const ringP = [1, 1, 1, 0.95, 0.85, 0.7, 0.55, 0.4, 0.28, 0.16, 0, 0];
+  const ring = pt.map((_, k) => angles.map(() => k > 0 && R() < ringP[k]));
+  const rayEnd = angles.map(() => 6 + Math.floor(R() * 6));
+
+  const shardsG = $("shards"), textG = $("textShards"), crackG = $("cracks");
+  const fmt = (pts) => "M" + pts.map(p => `${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join("L");
+  const op = (kk) => Math.max(0.12, 1 - kk * 0.1).toFixed(2);
+  const sw = (kk) => Math.max(0.7, 1.9 - kk * 0.13).toFixed(2);
+  let n = 0;
+  for (let k = 0; k < radii.length - 1; k++) {
+    for (let i = 0; i < RAYS; i++) {
+      const j = (i + 1) % RAYS;
+      const poly = k === 0 ? [pt[0][i], pt[1][i], pt[1][j]] : [pt[k][i], pt[k + 1][i], pt[k + 1][j], pt[k][j]];
+      let pieces = [poly], diag = null;
+      if (k >= 1 && k <= 3) {
+        if (R() < 0.5) { pieces = [[poly[0], poly[1], poly[2]], [poly[0], poly[2], poly[3]]]; diag = [poly[0], poly[2]]; }
+        else { pieces = [[poly[0], poly[1], poly[3]], [poly[1], poly[2], poly[3]]]; diag = [poly[1], poly[3]]; }
+      }
+      pieces.forEach((pc, pi) => {
+        const cx = pc.reduce((s, p) => s + p.x, 0) / pc.length;
+        const cy = pc.reduce((s, p) => s + p.y, 0) / pc.length;
+        const dx = cx - P.x, dy = cy - P.y, dist = Math.hypot(dx, dy) || 1;
+        const push = 6.5 * Math.exp(-dist / 120) + 1.6 * Math.exp(-dist / 420) + R() * 0.8 * Math.exp(-dist / 300);
+        const rot = (R() - 0.5) * 1.6 * Math.exp(-dist / 260);
+        const tf = `translate(${(dx / dist * push).toFixed(2)} ${(dy / dist * push).toFixed(2)}) rotate(${rot.toFixed(3)} ${cx.toFixed(1)} ${cy.toFixed(1)})`;
+        const d = fmt(pc) + "Z";
+        const near = Math.exp(-dist / 70);
+        const L = 47 + R() * 4 + near * 16;
+        el("path", { d, fill: `hsl(${(228 - near * 10).toFixed(1)} ${(74 + R() * 6).toFixed(1)}% ${L.toFixed(1)}%)`, transform: tf }, shardsG);
+        const cp = el("clipPath", { id: "c" + n }, defs);
+        el("path", { d }, cp);
+        const g = el("g", { transform: tf }, textG);
+        el("use", { href: "#titleText", "clip-path": `url(#c${n})` }, g);
+        n++;
+        if (pi === 0) {
+          if (k + 1 <= rayEnd[i]) el("path", { d: fmt([pt[k][i], pt[k + 1][i]]), stroke: "#EAF2FF", "stroke-width": sw(k), "stroke-opacity": op(k), fill: "none", "stroke-linecap": "round", transform: tf }, crackG);
+          if (ring[k + 1][i]) el("path", { d: fmt([pt[k + 1][i], pt[k + 1][j]]), stroke: "#EAF2FF", "stroke-width": sw(k), "stroke-opacity": op(k), fill: "none", "stroke-linecap": "round", transform: tf }, crackG);
+        }
+        if (pi === 1 && diag) el("path", { d: fmt(diag), stroke: "#EAF2FF", "stroke-width": "0.8", "stroke-opacity": "0.7", fill: "none", transform: tf }, crackG);
+      });
+    }
+  }
+
+  // ---- Chrome: header, annotation, info, tags, ruler ----
+  const ch = $("chrome");
+  const hair = { stroke: "#CFE0FF", "stroke-opacity": 0.55, "stroke-width": 1 };
+  el("text", { class: "mono", x: M, y: 92 }, ch, "GOOGLE DEVELOPER GROUPS ON CAMPUS");
+  el("text", { class: "mono", x: M, y: 116 }, ch, "UNIVERSITY OF BIRMINGHAM DUBAI");
+  const mark = el("g", { transform: `translate(${W - M - 74.4} 75.6) scale(0.6)`, fill: "none", stroke: "#F3F8FF", "stroke-width": 13, "stroke-linecap": "round" }, ch);
+  el("path", { d: "M16 34 L46 15 M16 34 L46 53 M78 15 L108 34 M78 53 L108 34" }, mark);
+  el("line", { x1: M, x2: W - M, y1: 146, y2: 146, ...hair }, ch);
+  el("text", { class: "label", x: M, y: 176 }, ch, "EVENT 001");
+  el("text", { class: "label", x: M + measure * 0.36, y: 176 }, ch, "25.12° N  55.41° E");
+
+  // FIG. 1: a leader rises from the comma to a label in the header row
+  el("circle", { cx: P.x, cy: P.y, r: 17, fill: "none", stroke: "#F3F8FF", "stroke-width": 1.2 }, ch);
+  el("line", { x1: P.x, x2: P.x, y1: P.y - 17, y2: 171, stroke: "#F3F8FF", "stroke-width": 1.2 }, ch);
+  el("circle", { cx: P.x, cy: 171, r: 2.5, fill: "#F3F8FF" }, ch);
+  el("text", { class: "label", x: P.x - 14, y: 176, "text-anchor": "end", style: "fill:#F3F8FF" }, ch, "FIG. 1  POINT OF IMPACT");
+
+  // tagline, fitted to the measure
+  const tagY = y2 + Math.round(fs * 0.36);
+  const big = el("text", { class: "big", x: M, y: tagY, "font-size": 78 }, ch, "<BREAK THE ICE>");
+  big.setAttribute("font-size", (78 * measure / big.getBBox().width).toFixed(2));
+  big.setAttribute("x", (2 * M - big.getBBox().x).toFixed(2));
+
+  // bottom-anchored information block
+  const fy = H - 58;
+  el("line", { x1: M, x2: W - M, y1: fy - 32, y2: fy - 32, ...hair }, ch);
+  el("text", { class: "mono", x: M, y: fy }, ch, "OUR FIRST EVENT.  FREE.  EVERYONE WELCOME.");
+  el("text", { class: "mono", x: W - M, y: fy, "text-anchor": "end" }, ch, "print(\"hello, world!\")");
+
+  const TH = 56, PADX = 20, GAP = 10, qs = TH * 2 + GAP;
+  const tagsBottom = fy - 32 - 44;
+  const rowsTop = tagsBottom - (TH * 2 + GAP);
+  const ty = rowsTop - 22;
+  el("text", { class: "label", x: M, y: ty }, ch, "ON THE ICE");
+  const tags = ["RIYAL OR FAKEH", "PICTIONARY", "FAMILY FEUD", "ARCADE", "SNACKS", "NEW PEOPLE"];
+  let tx = M, row = rowsTop;
+  tags.forEach((t) => {
+    const g = el("g", {}, ch);
+    const txt = el("text", { class: "tag", x: 0, y: 0, "font-size": 26 }, g, t);
+    const w = Math.round(txt.getBBox().width + PADX * 2);
+    if (tx + w > W - M - qs - 40) { tx = M; row += TH + GAP; }
+    el("rect", { x: tx, y: row, width: w, height: TH, fill: "none", stroke: "#F3F8FF", "stroke-width": 2 }, g);
+    txt.setAttribute("x", tx + PADX); txt.setAttribute("y", row + TH / 2 + 9.3);
+    g.appendChild(txt);
+    tx += w + GAP;
+  });
+  const qx = W - M - qs, qy = tagsBottom - qs;
+  el("rect", { x: qx, y: qy, width: qs, height: qs, fill: "#F3F8FF" }, ch);
+  el("image", { href: "../../socials/GDG-UOBD-socials-QR.svg", x: qx + 7, y: qy + 7, width: qs - 14, height: qs - 14 }, ch);
+  el("text", { class: "label", x: W - M, y: qy - 22, "text-anchor": "end" }, ch, "FOLLOW THE CLUB");
+
+  const gy = Math.min(ty, qy - 22) - 196;
+  el("line", { x1: M, x2: W - M, y1: gy, y2: gy, stroke: "#F3F8FF", "stroke-width": 2 }, ch);
+  for (let s = 0; s <= 48; s++) {
+    const x = M + s * measure / 48;
+    el("line", { x1: x, x2: x, y1: gy, y2: gy + (s % 8 === 0 ? 12 : 6), stroke: "#F3F8FF", "stroke-width": 1 }, ch);
+  }
+  const col = measure / 3;
+  [["DATE", "TUE 06 OCT", "2026"], ["TIME", "16:00 — 18:00", "ZERO AWKWARD"], ["PLACE", "0201 INNOVATION", "LOUNGE, UOBD"]].forEach(([k, a, b], c) => {
+    const x = M + c * col;
+    el("text", { class: "label", x, y: gy + 46 }, ch, k);
+    el("text", { class: "info", x, y: gy + 92, "font-size": 36 }, ch, a);
+    el("text", { class: "info-l", x, y: gy + 126, "font-size": 24 }, ch, b);
+  });
+
+  // right-edge temperature rule: the room warms from top to bottom
+  const rx = W - 26, r0 = y1 - fs * 0.7, r1 = gy - 40, steps = 40;
+  for (let s = 0; s <= steps; s++) {
+    const y = r0 + s * (r1 - r0) / steps, long = s % 5 === 0;
+    el("line", { x1: rx - (long ? 12 : 6), x2: rx, y1: y, y2: y, stroke: "#CFE0FF", "stroke-width": 1, "stroke-opacity": long ? 0.9 : 0.5 }, ch);
+  }
+  el("text", { class: "mono-s", x: rx, y: r0 - 14, "text-anchor": "end" }, ch, "−18°");
+  el("text", { class: "mono-s", x: rx, y: r1 + 24, "text-anchor": "end" }, ch, "+22°");
+
+  document.body.dataset.ready = "1";
+});
+</script>
+</body>
+</html>

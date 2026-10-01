@@ -94,6 +94,11 @@
       pointer-events: none;
     }
 
+    /* the event's name is a line of code: always lowercase */
+    .event-name {
+      text-transform: none;
+    }
+
     .foot {
       display: grid;
       gap: var(--space-3);
@@ -116,6 +121,36 @@
     <section class="hero" aria-labelledby="title">
       <h1 id="title" class="t-display bracketed">RESOURCES</h1>
       <p class="footer-copy">EVERYTHING THE TEAM HAS MADE, IN ONE PLACE. PICK ONE TO OPEN IT.</p>
+    </section>
+
+    <section class="shelf" aria-labelledby="hello-title">
+      <div class="shelf__head">
+        <h2 id="hello-title" class="t-h2 bracketed event-name">hello, world!</h2>
+        <span class="t-small">OUR FIRST EVENT · TUE 06 OCT · 0201 INNOVATION LOUNGE</span>
+      </div>
+      <div class="tiles">
+        <a class="card tile" href="hello-world/">
+          <svg class="shape shape--blue card__peek" aria-hidden="true"><use href="kit/assets/shapes.svg#triangle"/></svg>
+          <div class="tile__top"><span class="pill pill--sm pill--filled-blue">PAGE</span><span class="tile__kind">BRAND SHEET</span></div>
+          <h3 class="t-h2">BLUE ICE</h3>
+          <p class="tile__desc">The event's own look: a sheet of cobalt ice, struck once. Colours, type, the cracked wordmark, parts, poster grid and voice, with live examples.</p>
+          <span class="btn btn--sm tile__go">&lt;OPEN&gt;</span>
+        </a>
+        <a class="card tile" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/hello-world/BLUE-ICE.md">
+          <svg class="shape shape--blue card__peek" aria-hidden="true"><use href="kit/assets/shapes.svg#flower"/></svg>
+          <div class="tile__top"><span class="pill pill--sm pill--filled-blue">FILE</span><span class="tile__kind">MARKDOWN</span></div>
+          <h3 class="t-h2">BLUE-ICE.MD</h3>
+          <p class="tile__desc">The same rules and tokens as one text file. Give it to a designer or an AI assistant so whatever they make for the event matches the poster.</p>
+          <span class="btn btn--sm tile__go">&lt;READ&gt;</span>
+        </a>
+        <a class="card tile" href="hello-world/poster/hello-world-poster.pdf">
+          <svg class="shape shape--blue card__peek" aria-hidden="true"><use href="kit/assets/shapes.svg#capsule"/></svg>
+          <div class="tile__top"><span class="pill pill--sm pill--filled-blue">PRINT</span><span class="tile__kind">PDF · A-SIZE</span></div>
+          <h3 class="t-h2">EVENT POSTER</h3>
+          <p class="tile__desc">The first hello, world! poster: date, time, room, the games and the socials QR code. There's a JPG for Instagram on the brand sheet.</p>
+          <span class="btn btn--sm tile__go">&lt;OPEN&gt;</span>
+        </a>
+      </div>
     </section>
 
     <section class="shelf" aria-labelledby="brand-title">

@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blue Ice · hello, world!</title>
+  <meta name="description" content="The brand sheet for hello, world!, the first GDG on Campus UOBD event: a sheet of cobalt ice, struck once.">
+  <link rel="icon" href="logos/gdg-mark-cobalt.svg">
+  <link rel="stylesheet" href="blue-ice.css">
+  <script src="blue-ice.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--cobalt); font-family: var(--font-display); }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 5.33vw, 64px); }
+    .band { padding-block: clamp(56px, 8vw, 104px); position: relative; }
+    .band + .band[data-theme="frost"], [data-theme="frost"] + [data-theme="frost"] { border-top: 1px solid var(--line); }
+
+    /* header */
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 28px 18px; border-bottom: 1px solid var(--line); }
+    .top__club { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; line-height: 1.6; color: var(--text-soft); margin: 0; }
+    .top__right { display: flex; align-items: center; gap: 20px; }
+    .top__back { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; text-decoration: none; color: var(--text); white-space: nowrap; }
+    .top__back:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .top img { width: 52px; height: auto; display: block; }
+    .labels { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 14px; }
+
+    /* hero */
+    .hero { overflow: hidden; position: relative; padding-bottom: clamp(48px, 7vw, 88px); }
+    .hero__mark { margin-top: clamp(24px, 4vw, 44px); min-height: 200px; }
+    .hero__display {
+      margin: clamp(18px, 2.6vw, 30px) 0 0; font-weight: 900; font-size: clamp(30px, 7.4vw, 92px); line-height: 0.95;
+      letter-spacing: -0.02em; font-variation-settings: "wdth" 112; text-transform: uppercase; white-space: nowrap;
+    }
+    .hero__lede { max-width: 36em; margin: 22px 0 0; font-size: 19px; line-height: 1.5; font-weight: 500; color: var(--text-soft); }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hero__facts { margin-top: clamp(48px, 7vw, 80px); }
+    .hero__note { margin-top: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; color: var(--label); }
+
+    /* section heads */
+    .head { display: grid; gap: 14px; margin-bottom: clamp(32px, 4vw, 48px); max-width: 46em; }
+    .head h2 { margin: 0; font-weight: 900; font-size: clamp(36px, 6vw, 64px); line-height: 0.95; letter-spacing: -0.03em; font-variation-settings: "wdth" 90; text-transform: uppercase; text-wrap: balance; }
+    .head p { margin: 0; font-size: 17px; line-height: 1.55; font-weight: 500; color: var(--text-soft); }
+
+    .prose { max-width: 40em; font-size: 17px; line-height: 1.6; font-weight: 500; }
+    .prose p { margin: 0 0 14px; }
+    code { font-family: var(--font-mono); font-size: 0.86em; letter-spacing: 0.02em; background: var(--ground-raised); padding: 1px 6px; }
+
+    .moves { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
+    .moves article { display: grid; gap: 10px; align-content: start; border-top: 2px solid var(--rule); padding-top: 18px; }
+    .moves h3, .rules h3 { margin: 0; font-weight: 800; font-size: 24px; line-height: 1.15; text-transform: uppercase; letter-spacing: -0.01em; }
+    .moves p { margin: 0; font-size: 16px; line-height: 1.55; font-weight: 500; color: var(--text-soft); }
+
+    /* colour */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: 12px; }
+    .swatch { display: grid; grid-template-rows: 120px auto; border: 1px solid var(--line); }
+    .swatch__chip { display: flex; align-items: flex-end; padding: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; }
+    .swatch__meta { padding: 12px; display: grid; gap: 4px; }
+    .swatch__name { font-weight: 800; font-size: 18px; text-transform: uppercase; }
+    .swatch__hex { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--text-soft); }
+    .swatch__use { font-size: 13px; line-height: 1.4; color: var(--text-soft); margin-top: 4px; }
+    .ratio { display: flex; height: 36px; margin-top: 28px; border: 1px solid var(--line); }
+    .ratio span { display: block; }
+    .ratio-caption { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; }
+
+    .table-wrap { overflow-x: auto; margin-top: 40px; border: 1px solid var(--line); }
+    table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 15px; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-family: var(--font-mono); font-weight: 400; font-size: 12px; letter-spacing: 0.18em; color: var(--label); }
+    td { line-height: 1.45; font-weight: 500; }
+    td code { white-space: nowrap; }
+    .dot { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 8px; border: 1px solid var(--line); }
+
+    /* type */
+    .specimens { display: grid; gap: 0; }
+    .spec { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 24px; padding-block: 22px; border-top: 1px solid var(--line); align-items: baseline; }
+    .spec__meta { display: grid; gap: 6px; }
+    .spec__meta b { font-weight: 800; font-size: 16px; text-transform: uppercase; }
+    .spec__meta span { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--text-soft); line-height: 1.5; }
+    .spec__sample { min-width: 0; overflow-wrap: anywhere; }
+
+    /* fracture */
+    .lab { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+    .lab__stage { background: var(--ground); border: 1px solid var(--line); padding: 28px; overflow: hidden; position: relative; }
+    .lab__stage .bi-wordmark { width: 100%; }
+    .lab__bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
+    .rules { display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+    .rules li { display: block; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.5; font-weight: 500; color: var(--text-soft); }
+    .rules li b { display: block; margin-bottom: 4px; color: var(--text); font-weight: 800; text-transform: uppercase; font-size: 16px; }
+
+    /* components */
+    .demo { display: grid; gap: 14px; padding: 28px; border: 1px solid var(--line); background: var(--ground); }
+    .demos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 20px; }
+    .demo--wide { grid-column: 1 / -1; }
+    .demo__row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .demo .bi-tag { height: 44px; font-size: 18px; padding: 0 14px; }
+    .demo pre { margin: 6px 0 0; padding: 14px; background: var(--ground-raised); font-family: var(--font-mono); font-size: 13px; line-height: 1.6; overflow-x: auto; color: var(--text); }
+
+    /* posters */
+    .posters { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+    .posters figure { margin: 0; }
+    .posters img { display: block; width: 100%; height: auto; box-shadow: var(--frost-glow); }
+    .posters figcaption { margin-top: 12px; }
+    .series { display: grid; gap: 10px; margin-top: 28px; }
+    .series div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.5; font-weight: 500; }
+
+    /* logos */
+    .logos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+    .logo { display: grid; gap: 14px; }
+    .logo__tile { display: grid; place-items: center; height: 200px; border: 1px solid var(--line); }
+    .logo__tile img { width: 120px; height: auto; }
+
+    /* don't + downloads */
+    .donts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 0 32px; margin: 0; padding: 0; list-style: none; }
+    .donts li { padding-block: 16px; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.5; font-weight: 500; }
+    .donts li b { display: block; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+    .files { display: grid; margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--rule); }
+    .files li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; align-items: center; padding-block: 18px; border-bottom: 1px solid var(--line); }
+    .files b { font-weight: 800; font-size: 20px; text-transform: uppercase; }
+    .files p { margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--text-soft); font-weight: 500; }
+    .files .bi-button { min-height: 48px; font-size: 16px; padding: 0 20px; }
+
+    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 28px 40px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; color: var(--text-soft); }
+
+    @media (max-width: 860px) {
+      .lab, .posters { grid-template-columns: 1fr; }
+      .spec { grid-template-columns: 1fr; gap: 10px; }
+      .series div { grid-template-columns: 1fr; gap: 2px; }
+      .files li { grid-template-columns: 1fr; }
+      .files .bi-button { justify-self: start; }
+    }
+    @media (max-width: 520px) {
+      .top__club { font-size: 11px; }
+      .top__back { font-size: 11px; }
+      .top img { width: 40px; }
+      .hero__display { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO ------------------------------------------------------------- -->
+<header class="hero" data-theme="ice">
+  <div class="wrap">
+    <div class="top">
+      <p class="top__club">GOOGLE DEVELOPER GROUPS ON CAMPUS<br>UNIVERSITY OF BIRMINGHAM DUBAI</p>
+      <div class="top__right">
+        <a class="top__back" href="../">&lt;ALL RESOURCES</a>
+        <img src="logos/gdg-mark-frost.svg" alt="GDG bracket mark">
+      </div>
+    </div>
+    <div class="labels">
+      <span class="bi-label">BRAND SHEET · EVENT 001</span>
+      <span class="bi-label">25.12° N  55.41° E</span>
+      <span class="bi-label" style="color:var(--text)">FIG. 1  POINT OF IMPACT: THE COMMA</span>
+    </div>
+    <div class="hero__mark" id="heroMark" role="img" aria-label="hello, world!"></div>
+    <h1 class="hero__display">&lt;BLUE ICE&gt;</h1>
+    <p class="hero__lede">The look of hello, world!, our first event. One idea: a sheet of cobalt ice, struck once, breaking into a room full of people. Use this sheet for posters, posts, slides, screens and the event website.</p>
+    <div class="hero__actions">
+      <a class="bi-button" href="poster/hello-world-poster.pdf" download>&lt;DOWNLOAD THE POSTER&gt;</a>
+      <a class="bi-button bi-button--outline" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/hello-world/BLUE-ICE.md">READ BLUE-ICE.MD</a>
+    </div>
+    <div class="hero__facts" id="facts"></div>
+  </div>
+</header>
+
+<!-- IDEA ------------------------------------------------------------- -->
+<section class="band" data-theme="frost" aria-labelledby="idea">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 2  THE IDEA</span>
+      <h2 id="idea">One sheet, one blow</h2>
+      <p>It's an icebreaker, so the whole identity is ice breaking. Three moves make every layout.</p>
+    </div>
+    <div class="moves">
+      <article>
+        <span class="bi-label">ONE BLUE</span>
+        <h3>Cobalt as a material</h3>
+        <p>The ground is flat, heavy cobalt, like riso ink or a cyanotype. White is the light inside the ice, never a second colour.</p>
+      </article>
+      <article>
+        <span class="bi-label">STRUCK ONCE</span>
+        <h3>One point of impact</h3>
+        <p>Cracks run out from one point in straight rays and broken rings, and the pieces drift apart by a few pixels. The point sits on the comma: the pause before you say hi.</p>
+      </article>
+      <article>
+        <span class="bi-label">FIELD NOTES</span>
+        <h3>Labelled like a study</h3>
+        <p>Small spaced mono labels name what you're looking at: EVENT 001, FIG. 1, a temperature scale from −18° to +22°. The room warms up as the event goes on.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COLOUR ----------------------------------------------------------- -->
+<section class="band" data-theme="ice" aria-labelledby="colour">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 3  COLOUR</span>
+      <h2 id="colour">One blue, seven temperatures</h2>
+      <p>About 85% cobalt, 13% frost, 2% everything else. No second hue: Google red, yellow and green stay in the main club brand.</p>
+    </div>
+    <div class="swatches" id="swatches"></div>
+    <div class="ratio" aria-hidden="true">
+      <span style="flex:85;background:var(--cobalt)"></span>
+      <span style="flex:13;background:var(--frost)"></span>
+      <span style="flex:1;background:var(--bloom)"></span>
+      <span style="flex:1;background:var(--cobalt-deep)"></span>
+    </div>
+    <div class="ratio-caption"><span class="bi-label">COBALT 85%</span><span class="bi-label">FROST 13%</span><span class="bi-label">REST 2%</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>TOKEN</th><th>ICE (POSTERS, SCREENS)</th><th>FROST (READING)</th><th>USE</th></tr></thead>
+        <tbody id="themeRows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TYPE ------------------------------------------------------------- -->
+<section class="band" data-theme="frost" aria-labelledby="type">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 4  TYPE</span>
+      <h2 id="type">Giant ice, tiny notes</h2>
+      <p>Archivo for everything people read, DM Mono for labels and code. The jump in size between the two is the point; don't fill the middle sizes with extra words.</p>
+    </div>
+    <div class="specimens" id="specimens"></div>
+  </div>
+</section>
+
+<!-- FRACTURE --------------------------------------------------------- -->
+<section class="band" data-theme="ice" aria-labelledby="fracture">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 5  THE FRACTURE</span>
+      <h2 id="fracture">Generated, never drawn</h2>
+      <p>The cracks come from <code>BlueIce.Wordmark()</code> in <code>blue-ice.js</code>, so every size and every format breaks the same way. Strike it again to see another seed.</p>
+    </div>
+    <div class="lab">
+      <div>
+        <div class="lab__stage" id="lab"></div>
+        <div class="lab__bar">
+          <span class="bi-label" id="seedLabel">SEED 20261006</span>
+          <div class="demo__row">
+            <button class="bi-button bi-button--outline" type="button" id="strike">STRIKE AGAIN</button>
+            <button class="bi-button bi-button--outline" type="button" id="reset">USE THE POSTER'S SEED</button>
+          </div>
+        </div>
+      </div>
+      <ul class="rules">
+        <li><b>One impact</b>On a glyph that means something: the comma, the !, the 0 of 001. Never in empty space.</li>
+        <li><b>24 rays, broken rings</b>Rings at about 16, 38, 70, 115, 178, 262, 380, 545 and 780px from the impact on a 300px wordmark, each ±18%. They break up as they travel and are gone by 1100px.</li>
+        <li><b>Crushed centre</b>The three innermost rings split once more into triangles.</li>
+        <li><b>Drift</b>Shards move outward about 6.5px at the impact, under 1px at the edges, with a tiny turn. The letters move with them.</li>
+        <li><b>Lines</b><code>crack</code>, 1.6px at the impact thinning to 0.7px and fading to about 12%.</li>
+        <li><b>One seed per campaign</b>Every poster in a series keeps the same cracks. A new event gets a new seed.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS ------------------------------------------------------- -->
+<section class="band" data-theme="frost" aria-labelledby="parts">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 6  PARTS</span>
+      <h2 id="parts">Square, outlined, few</h2>
+      <p>Every corner is square and every line is 1px or 2px. These come from <code>blue-ice.js</code>; each demo shows both grounds.</p>
+    </div>
+    <div class="demos">
+      <div class="demo" data-theme="ice">
+        <span class="bi-label">BUTTON · ICE</span>
+        <div class="demo__row" id="btnIce"></div>
+        <pre>BlueIce.Button({ label: "&lt;RSVP&gt;" })</pre>
+      </div>
+      <div class="demo" data-theme="frost">
+        <span class="bi-label">BUTTON · FROST</span>
+        <div class="demo__row" id="btnFrost"></div>
+        <pre>BlueIce.Button({ label: "SEE THE SCHEDULE", variant: "outline" })</pre>
+      </div>
+      <div class="demo" data-theme="ice">
+        <span class="bi-label">TAGS · ON THE ICE</span>
+        <div class="bi-tags" id="tags"></div>
+        <pre>BlueIce.Tag("PICTIONARY")</pre>
+      </div>
+      <div class="demo" data-theme="ice">
+        <span class="bi-label">ANNOTATION</span>
+        <div id="annot"></div>
+        <pre>BlueIce.Annotation({ label: "FIG. 2  YOUR TEAM" })</pre>
+      </div>
+      <div class="demo demo--wide" data-theme="frost">
+        <span class="bi-label">FACT GRID · FROST</span>
+        <div id="factsFrost"></div>
+        <pre>BlueIce.FactGrid([{ label: "DATE", value: "TUE 06 OCT", note: "2026" }, …])</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSTERS ---------------------------------------------------------- -->
+<section class="band" data-theme="ice" aria-labelledby="posters">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 7  POSTERS</span>
+      <h2 id="posters">The first poster is the grid</h2>
+      <p>Built on a 1200 × 1697 sheet with a 64px margin. Copy <code>poster/poster-source.html</code>, change the words, open it in Chrome and screenshot or print.</p>
+    </div>
+    <div class="posters">
+      <figure>
+        <img src="poster/hello-world-poster-ig.jpg" alt="The hello, world! poster: the cobalt sheet with the cracked wordmark, the BREAK THE ICE line, the date, time and room, the activities and the socials QR code." width="2400" height="3394" loading="lazy">
+        <figcaption class="bi-label">HELLO-WORLD-POSTER · 2400 × 3394</figcaption>
+      </figure>
+      <div>
+        <ul class="rules">
+          <li><b>Top</b>Club name in mono on two lines, the bracket mark right, a hairline, then a label row: EVENT 001, the coordinates, FIG. 1.</li>
+          <li><b>Middle</b>The wordmark, its widest line filling the 1072px measure; under it the bracketed line, also fitted.</li>
+          <li><b>Space</b>Leave the gap between the bracketed line and the facts for the cracks to breathe.</li>
+          <li><b>Bottom</b>Anchored to the foot: the ruler and DATE, TIME, PLACE; the tags left and the QR tile right, tops aligned; a hairline; the mono footer.</li>
+          <li><b>Edge</b>A temperature scale down the right edge, −18° at the top to +22° above the facts.</li>
+        </ul>
+        <div class="series">
+          <span class="bi-label">A SERIES: CHANGE ONE THING PER POSTER</span>
+          <div><span class="bi-label">COUNTDOWN</span><span>The bracketed line becomes &lt;3 DAYS&gt;, &lt;TOMORROW&gt;, &lt;TODAY, 16:00&gt;.</span></div>
+          <div><span class="bi-label">PER GAME</span><span>The bracketed line names the game, &lt;RIYAL OR FAKEH&gt;, and its tag is the only one, filled solid.</span></div>
+          <div><span class="bi-label">AFTER</span><span>A cobalt duotone photo under the wordmark, and &lt;THE ICE IS BROKEN&gt;.</span></div>
+          <div><span class="bi-label">INSTAGRAM</span><span>Post 1080 × 1350: wordmark, bracketed line, the three facts. Story 1080 × 1920: the full grid with 24px more margin top and bottom.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE + WEB ------------------------------------------------------ -->
+<section class="band" data-theme="frost" aria-labelledby="voice">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 8  WORDS AND SCREENS</span>
+      <h2 id="voice">Short, warm, a little dry</h2>
+      <p>We talk to students as you and about the club as we. The jokes come from the ice, never at anyone's expense.</p>
+    </div>
+    <div class="moves">
+      <article>
+        <span class="bi-label">CASING</span>
+        <h3>Capitals, with two exceptions</h3>
+        <p>The event name is always lowercase with its punctuation, exactly hello, world!, because it's a line of code. Running text on a website is in sentence case.</p>
+      </article>
+      <article>
+        <span class="bi-label">LINES WE USE</span>
+        <h3>&lt;BREAK THE ICE&gt;</h3>
+        <p>ON THE ICE · ZERO AWKWARD · OUR FIRST EVENT. FREE. EVERYONE WELCOME. · print("hello, world!"). Facts are terse: TUE 06 OCT, 16:00 — 18:00, 0201 INNOVATION LOUNGE.</p>
+      </article>
+      <article>
+        <span class="bi-label">WEBSITE</span>
+        <h3>Ice for the show, frost for reading</h3>
+        <p>The hero, facts and footer sit on Ice; long text and forms sit on Frost. The wordmark arrives whole and cracks once, about 900ms; with reduced motion it's cracked from the start.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS ------------------------------------------------------------ -->
+<section class="band" data-theme="ice" aria-labelledby="logos">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 9  THE MARK</span>
+      <h2 id="logos">The bracket mark, in one ink</h2>
+      <p>The club's real mark, same four strokes, one colour. Keep clear space of half its height all round; never smaller than 40px wide on screen or 12mm in print.</p>
+    </div>
+    <div class="logos">
+      <div class="logo">
+        <div class="logo__tile" style="background:var(--cobalt)"><img src="logos/gdg-mark-frost.svg" alt="Bracket mark in frost"></div>
+        <a class="bi-label" href="logos/gdg-mark-frost.svg" download>GDG-MARK-FROST.SVG · ON ICE ↓</a>
+      </div>
+      <div class="logo">
+        <div class="logo__tile" style="background:var(--frost)"><img src="logos/gdg-mark-cobalt.svg" alt="Bracket mark in cobalt"></div>
+        <a class="bi-label" href="logos/gdg-mark-cobalt.svg" download>GDG-MARK-COBALT.SVG · ON FROST ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DON'T ------------------------------------------------------------ -->
+<section class="band" data-theme="frost" aria-labelledby="dont">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 10  DON'T</span>
+      <h2 id="dont">Keep it cold</h2>
+    </div>
+    <ul class="donts">
+      <li><b>No second hue</b>Fun comes from the crack and the jokes, not from adding red or yellow.</li>
+      <li><b>One impact</b>Never two, and never in empty space.</li>
+      <li><b>No rounded corners</b>Ice breaks with corners. Only the impact ring is round.</li>
+      <li><b>No shadows</b>The only depth is light through ice: the frost glow.</li>
+      <li><b>No capitals in the name</b>Always hello, world! with its comma and !.</li>
+      <li><b>No emoji</b>Anywhere: posters, posts, captions, the site.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FILES ------------------------------------------------------------ -->
+<section class="band" data-theme="ice" aria-labelledby="files">
+  <div class="wrap">
+    <div class="head">
+      <span class="bi-label">FIG. 11  FILES</span>
+      <h2 id="files">Take it with you</h2>
+    </div>
+    <ul class="files">
+      <li><div><b>Poster · print</b><p>A3-ratio PDF, 2400 × 3394. Print at 100% with backgrounds on.</p></div><a class="bi-button" href="poster/hello-world-poster.pdf" download>&lt;PDF&gt;</a></li>
+      <li><div><b>Poster · Instagram</b><p>The same poster as a JPG for posts and stories.</p></div><a class="bi-button bi-button--outline" href="poster/hello-world-poster-ig.jpg" download>JPG</a></li>
+      <li><div><b>Poster source</b><p>The HTML that draws the poster. Edit the words, open it in Chrome, screenshot at 2×.</p></div><a class="bi-button bi-button--outline" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/hello-world/poster/poster-source.html">HTML</a></li>
+      <li><div><b>BLUE-ICE.MD</b><p>Every rule and token as one text file, for designers, Canva and AI assistants.</p></div><a class="bi-button bi-button--outline" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/hello-world/BLUE-ICE.md">READ</a></li>
+      <li><div><b>blue-ice.css + blue-ice.js</b><p>Tokens, fonts and the components on this page. Load the CSS, then the script.</p></div><a class="bi-button bi-button--outline" href="https://github.com/UdayAhuja19/gdg-resources/tree/main/hello-world">REPO</a></li>
+      <li><div><b>Editable design system</b><p>The same system in Claude, for building new pieces with it. Ask Uday for access.</p></div><a class="bi-button bi-button--outline" href="https://claude.ai/artifact/2oeB4uocqaDMamzio7DwzZ">OPEN ↗</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer data-theme="ice">
+  <div class="wrap foot">
+    <span>OUR FIRST EVENT.  FREE.  EVERYONE WELCOME.</span>
+    <span>print("hello, world!")</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var SEED = 20261006;
+  var COLORS = [
+    ["cobalt", "#1E3FD9", "The ice sheet. Every poster ground and the website hero."],
+    ["cobalt-deep", "#0A1B66", "Deepest ice. Text on frost."],
+    ["cobalt-edge", "#142FB0", "A raised band or code block on cobalt."],
+    ["frost", "#F3F8FF", "The white of the ice. Never pure #FFFFFF."],
+    ["glacier", "#CFE0FF", "Second lines on cobalt. 5.7:1."],
+    ["rime", "#B8CEFF", "Mono labels on cobalt. 4.8:1, the faintest text blue."],
+    ["bloom", "#7FB2FF", "Glow behind the wordmark. Never text."]
+  ];
+  var THEME = [
+    ["ground", "cobalt", "frost", "Page and poster background."],
+    ["text", "frost", "cobalt-deep", "Headlines and body copy. 7.1:1 / 14.5:1."],
+    ["text-soft", "glacier", "#2B3E99", "Second lines and captions. 5.7:1 / 8.7:1."],
+    ["label", "rime", "#3D52B0", "Mono labels. 4.8:1 / 6.5:1."],
+    ["rule", "frost", "cobalt", "The 2px rule, tag outlines, the impact ring."],
+    ["crack", "#EAF2FF", "cobalt", "Fracture lines, fading outward."],
+    ["accent / on-accent", "frost / cobalt", "cobalt / frost", "Primary button and the QR tile, and the text on them."],
+    ["alert", "#FFC2B8", "#B3261E", "Form errors only, always with words."]
+  ];
+  var SPECS = [
+    ["wordmark", "Archivo 900 · wdth 82 · −5% · 0.86", "hello, world!", "font-weight:900;font-size:clamp(56px,10vw,120px);line-height:.86;letter-spacing:-0.05em;font-variation-settings:'wdth' 82;text-transform:none"],
+    ["display", "Archivo 900 · wdth 112 · −2%", "<BREAK THE ICE>", "font-weight:900;font-size:clamp(32px,5.4vw,64px);line-height:.95;letter-spacing:-0.02em;font-variation-settings:'wdth' 112"],
+    ["headline", "Archivo 900 · wdth 90 · 56px", "RIYAL OR FAKEH", "font-weight:900;font-size:clamp(32px,4.6vw,56px);line-height:1;letter-spacing:-0.03em;font-variation-settings:'wdth' 90"],
+    ["info", "Archivo 800 · 36px", "TUE 06 OCT · 16:00 — 18:00", "font-weight:800;font-size:clamp(24px,3vw,36px);line-height:1.1;letter-spacing:-0.01em;font-variant-numeric:tabular-nums"],
+    ["tag", "Archivo 700 · 26px · +2%", "PICTIONARY", "font-weight:700;font-size:26px;letter-spacing:0.02em"],
+    ["body", "Archivo 500 · 17/25.5 · sentence case", "Snacks are open the whole time. Come for any part of it, and bring someone you haven't met yet.", "font-weight:500;font-size:17px;line-height:1.5;text-transform:none;max-width:36em"],
+    ["label", "DM Mono · 13px · +20%", "FIG. 1  POINT OF IMPACT", "font-family:var(--font-mono);font-size:13px;letter-spacing:0.2em;color:var(--label)"],
+    ["mono", "DM Mono · 15px · +16%", "print(\"hello, world!\")", "font-family:var(--font-mono);font-size:15px;letter-spacing:0.16em;text-transform:none"]
+  ];
+  var FACTS = [
+    { label: "DATE", value: "TUE 06 OCT", note: "2026" },
+    { label: "TIME", value: "16:00 — 18:00", note: "ZERO AWKWARD" },
+    { label: "PLACE", value: "0201 INNOVATION", note: "LOUNGE, UOBD" }
+  ];
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // static parts
+  COLORS.forEach(function (c) {
+    var light = ["frost", "glacier", "rime", "bloom"].indexOf(c[0]) >= 0;
+    var s = document.createElement("div");
+    s.className = "swatch";
+    s.innerHTML = '<div class="swatch__chip" style="background:' + c[1] + ';color:' + (light ? "#0A1B66" : "#F3F8FF") + '">' + c[1] + '</div>' +
+      '<div class="swatch__meta"><span class="swatch__name">' + c[0] + '</span><span class="swatch__use">' + c[2] + '</span></div>';
+    $("swatches").appendChild(s);
+  });
+  function chip(v) {
+    var css = v.charAt(0) === "#" ? v : "var(--" + v.split(" ")[0] + ")";
+    return '<span class="dot" style="background:' + css + '"></span><code>' + v + '</code>';
+  }
+  THEME.forEach(function (r) {
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td><code>" + r[0] + "</code></td><td>" + chip(r[1]) + "</td><td>" + chip(r[2]) + "</td><td>" + r[3] + "</td>";
+    $("themeRows").appendChild(tr);
+  });
+  SPECS.forEach(function (s) {
+    var d = document.createElement("div");
+    d.className = "spec";
+    d.innerHTML = '<div class="spec__meta"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>';
+    var p = document.createElement("div");
+    p.className = "spec__sample";
+    p.setAttribute("style", s[3]);
+    p.textContent = s[2];
+    d.appendChild(p);
+    $("specimens").appendChild(d);
+  });
+
+  $("facts").appendChild(BlueIce.FactGrid(FACTS));
+  $("factsFrost").appendChild(BlueIce.FactGrid(FACTS));
+  $("btnIce").appendChild(BlueIce.Button({ label: "<RSVP>" }));
+  $("btnIce").appendChild(BlueIce.Button({ label: "SEE THE SCHEDULE", variant: "outline" }));
+  $("btnFrost").appendChild(BlueIce.Button({ label: "<RSVP>" }));
+  $("btnFrost").appendChild(BlueIce.Button({ label: "SEE THE SCHEDULE", variant: "outline" }));
+  var full = BlueIce.Button({ label: "FULL" }); full.disabled = true; $("btnFrost").appendChild(full);
+  ["RIYAL OR FAKEH", "PICTIONARY", "FAMILY FEUD", "ARCADE", "SNACKS"].forEach(function (t) { $("tags").appendChild(BlueIce.Tag(t)); });
+  $("annot").appendChild(BlueIce.Annotation({ label: "FIG. 2  YOUR TEAM" }));
+
+  // the wordmarks need the real font to measure
+  var seed = SEED;
+  function drawHero() {
+    var box = $("heroMark"), w = Math.floor(box.clientWidth);
+    if (!w) return;
+    box.innerHTML = "";
+    box.appendChild(BlueIce.Wordmark({ width: w, bleed: true, seed: SEED }));
+  }
+  function drawLab() {
+    var box = $("lab"), w = Math.floor(box.clientWidth - 56);
+    if (w <= 0) return;
+    box.innerHTML = "";
+    box.appendChild(BlueIce.Wordmark({ width: w, seed: seed }));
+    $("seedLabel").textContent = "SEED " + seed;
+  }
+  function heroArrive() {
+    var box = $("heroMark"), w = Math.floor(box.clientWidth);
+    if (reduce || !w) return drawHero();
+    box.innerHTML = "";
+    box.appendChild(BlueIce.Wordmark({ width: w, bleed: true, seed: SEED, crack: false }));
+    setTimeout(drawHero, 450);
+  }
+  Promise.all([
+    document.fonts.load('900 100px "Archivo"'),
+    document.fonts.load('800 36px "Archivo"'),
+    document.fonts.load('13px "DM Mono"')
+  ]).catch(function () {}).then(function () { heroArrive(); drawLab(); });
+
+  $("strike").addEventListener("click", function () { seed = Math.floor(Math.random() * 1e9); drawLab(); });
+  $("reset").addEventListener("click", function () { seed = SEED; drawLab(); });
+
+  var lastW = window.innerWidth, t;
+  window.addEventListener("resize", function () {
+    if (window.innerWidth === lastW) return;
+    lastW = window.innerWidth;
+    clearTimeout(t);
+    t = setTimeout(function () { drawHero(); drawLab(); }, 150);
+  });
+})();
+</script>
+</body>
+</html>

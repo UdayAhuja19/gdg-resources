@@ -60,7 +60,7 @@ All in `user-unfriendly.css`, sized in em (set `font-size` on a part to scale it
 - **Agenda** `.uu-agenda`: the AGENDA.EXE panel with ticks, times and lengths.
 - **Event app:** `.uu-card` (a dealt website or feature), `.uu-badge` (award badges, `aria-pressed`), `.uu-rate` (the judges' six blocks).
 
-`user-unfriendly.js` draws the pixel effects on a `<canvas class="uu-pixels">`: `pixelText()` for a mosaic title (soft greys like the launch poster, or `crisp: true` for ink blocks) and `dither()` for the red pixel edge into a slab. Call `fontsReady()` first.
+`user-unfriendly.js` draws the pixel effects on a `<canvas class="uu-pixels">`. `pixelWord()` makes the launch poster's mosaic the way it was made: the word set big (with `tall`, `track` and `soften`), shrunk to blocks whose grey is how much letter they hold, and stretched afterwards with CSS `aspect-ratio` so the blocks stretch too (`fitSize()` gives two words one size). `pixelText()` is the simpler mosaic, with `crisp: true` for ink-only blocks like the agenda posters. `dither()` draws the red pixel edge into a slab. Call `fontsReady()` first.
 
 ## Layout
 

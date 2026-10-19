@@ -40,9 +40,12 @@
     .hero__club { position: relative; margin-top: clamp(28px, 4vw, 48px); text-align: center; font-size: clamp(11px, 1.15vw, 13px); }
     .hero__clubText { display: inline-block; margin: 0; font-weight: 800; font-stretch: 62%; font-size: clamp(20px, 3.5vw, 44px); line-height: 1; letter-spacing: -0.01em; text-transform: uppercase; filter: url(#uu-smear-soft); }
     .hero__title { position: relative; margin-top: clamp(40px, 6vw, 76px); font-size: clamp(11px, 1.15vw, 13px); }
-    .hero__lineWrap { position: relative; margin-top: clamp(18px, 2.6vw, 32px); font-size: clamp(11px, 1.15vw, 13px); }
-    .hero__line { display: inline-block; margin: 0; white-space: nowrap; font-weight: 500; font-stretch: 62%; font-size: 64px; line-height: 1.05; letter-spacing: 0.03em; filter: url(#uu-smear); }
-    .hero .uu-track__tag { font-size: 1em; padding: 0.25em 0.45em 0.15em; }
+    .hero__word { position: relative; }
+    .hero__word + .hero__word { margin-top: 0; }
+    .hero__lineWrap { position: relative; text-align: center; margin-top: clamp(18px, 2.6vw, 32px); font-size: clamp(11px, 1.15vw, 13px); }
+    .hero__line { display: inline-block; margin: 0; white-space: nowrap; font-weight: 300; font-stretch: 62%; font-size: 64px; line-height: 1.1; letter-spacing: 0.09em; word-spacing: 0.12em; filter: url(#uu-smear); transform: scaleY(2); transform-origin: 50% 0; margin-bottom: 1.1em; }
+    .hero .uu-track { border-width: clamp(2px, 0.28vw, 3px); }
+    .hero .uu-track__tag { left: calc(-1 * clamp(2px, 0.28vw, 3px)); font-size: clamp(11px, 1.25vw, 14px); padding: 0.25em 0.45em 0.15em; }
     .hero__dither { display: block; width: 100%; height: auto; image-rendering: pixelated; }
     .hero__crosses { position: relative; height: 0; font-size: 14px; color: var(--uu-ink); }
     .hero__slab { padding-block: clamp(18px, 2.6vw, 32px) clamp(24px, 3.6vw, 46px); }
@@ -178,7 +181,7 @@
 <!-- ======================= HERO ======================= -->
 <header class="hero">
   <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
-    <filter id="uu-smear" x="-2%" y="-40%" width="104%" height="180%" primitiveUnits="objectBoundingBox"><feGaussianBlur stdDeviation="0.0022 0.1"/></filter>
+    <filter id="uu-smear" x="-2%" y="-40%" width="104%" height="180%" primitiveUnits="objectBoundingBox"><feGaussianBlur stdDeviation="0.0022 0.055"/></filter>
     <filter id="uu-smear-soft" x="-2%" y="-40%" width="104%" height="180%" primitiveUnits="objectBoundingBox"><feGaussianBlur stdDeviation="0.0012 0.035"/></filter>
   </svg>
   <div class="hero__field">
@@ -192,7 +195,8 @@
         <p class="hero__clubText">GDG on Campus UOBD × Computing <span class="hit">Club</span></p>
       </div>
       <div class="hero__title" data-hero-title aria-hidden="true">
-        <canvas class="uu-pixels" width="52" height="24"></canvas>
+        <div class="hero__word"><canvas class="uu-pixels" width="20" height="10"></canvas></div>
+        <div class="hero__word"><canvas class="uu-pixels" width="46" height="10"></canvas></div>
       </div>
       <div class="hero__lineWrap" data-hero-line aria-hidden="true">
         <p class="hero__line">if you can read the text above, <span class="hit">we failed</span></p>
@@ -653,7 +657,7 @@
     <ul class="files">
       <li><b>USER-UNFRIENDLY.md</b><span>These rules as one text file. Give it to a designer or an AI assistant so whatever they make matches.</span><a class="uu-btn" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/user-unfriendly/USER-UNFRIENDLY.md">Read</a></li>
       <li><b>user-unfriendly.css</b><span>The colours, type and every part on this page, sized in em. Link it and use the <code>uu-</code> classes.</span><a class="uu-btn" href="user-unfriendly.css" download>Download</a></li>
-      <li><b>user-unfriendly.js</b><span>The pixel effects: the mosaic title and the red dither edge, drawn on a canvas so they stay sharp at any size.</span><a class="uu-btn" href="user-unfriendly.js" download>Download</a></li>
+      <li><b>user-unfriendly.js</b><span>The pixel effects: the launch poster's mosaic title (<code>pixelWord</code>), a simpler mosaic (<code>pixelText</code>) and the red dither edge, drawn on a canvas so they stay sharp at any size.</span><a class="uu-btn" href="user-unfriendly.js" download>Download</a></li>
       <li><b>Archivo</b><span>The one font file covers every weight (100–900) and width (62–125%). SIL Open Font License.</span><a class="uu-btn" href="fonts/archivo-latin-wdth-normal.woff2" download>Download</a></li>
       <li><b>DM Mono</b><span>Regular only. SIL Open Font License. On Google Fonts too.</span><a class="uu-btn" href="fonts/DMMono-Regular.ttf" download>Download</a></li>
     </ul>
@@ -670,7 +674,7 @@
 </footer>
 
 <script type="module">
-  import { fontsReady, pixelText, dither } from "./user-unfriendly.js";
+  import { fontsReady, pixelText, pixelWord, fitSize, dither } from "./user-unfriendly.js";
 
   // Copy a colour's hex code
   const said = document.querySelector("[data-copied]");
@@ -711,10 +715,15 @@
 
   await fontsReady();
 
-  // The hero title, pixelated like the launch poster: tall letters, a box on the first U
-  const title = document.querySelector("[data-hero-title]");
-  const boxes = pixelText(title.querySelector("canvas"), { lines: ["USER", "UNFRIENDLY"], cols: 52, spread: [0], tall: 1.35, gap: 0.1 });
-  track(title, boxes[0][0], "i cant find the back button help", true);
+  // The hero title, made like the launch poster: both words pixelated at one size, then USER stretched to the
+  // full width so its blocks come out wide. A box on the first U.
+  const [userCanvas, unfriendlyCanvas] = document.querySelectorAll("[data-hero-title] canvas");
+  const look = { tall: 1.25, soften: 0.18, track: 0.07 };
+  const size = fitSize("UNFRIENDLY", 46, undefined, look.track);
+  pixelWord(unfriendlyCanvas, "UNFRIENDLY", { size, ...look });
+  const letters = pixelWord(userCanvas, "USER", { size, ...look });
+  userCanvas.style.aspectRatio = `${unfriendlyCanvas.width} / ${userCanvas.height}`;
+  track(userCanvas.parentElement, letters[0], "i cant find the back button help", true);
 
   // Boxes round words in the smeared lines sit outside the smear, so they stay sharp
   const club = document.querySelector("[data-hero-club]");
@@ -735,7 +744,7 @@
   const layout = () => {
     // The smeared line runs the full width, like the poster
     line.style.fontSize = "64px";
-    line.style.fontSize = `${(64 * lineWrap.clientWidth) / line.getBoundingClientRect().width}px`;
+    line.style.fontSize = `${(64 * 0.8 * lineWrap.clientWidth) / line.getBoundingClientRect().width}px`;
     around(lineWrap, line.querySelector(".hit"), failed, 6, 2);
     const hit = club.querySelector(".hit");
     around(club, hit, clubBox, 6, 10, hit.getBoundingClientRect().width * 1.6);

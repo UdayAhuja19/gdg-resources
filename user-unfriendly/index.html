@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>USER UNFRIENDLY · Brand sheet</title>
+  <meta name="description" content="The brand sheet for USER UNFRIENDLY (GDG on Campus UOBD × Computing Club, Tue 27 Oct 2026): colours, type, parts, voice, the approved posters and the files.">
+  <link rel="icon" href="../kit/assets/logo-mark.svg">
+  <link rel="stylesheet" href="user-unfriendly.css">
+  <style>
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; color: var(--uu-ink); background: var(--uu-paper); font-family: var(--uu-sans); }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--uu-red); outline-offset: 3px; }
+    img { max-width: 100%; display: block; }
+    code { font-family: var(--uu-mono); font-size: 0.86em; letter-spacing: 0.02em; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 4.7vw, 56px); }
+    .band { padding-block: clamp(56px, 8vw, 104px); }
+    .band--ink { --uu-shadow: var(--uu-red); color: var(--uu-paper); background: var(--uu-ink); }
+    .band + .band:not(.band--ink) { border-top: 3px solid var(--uu-ink); }
+
+    /* section heads */
+    .kicker { margin: 0 0 14px; font-family: var(--uu-mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .sect { margin: 0; font-weight: 900; font-stretch: 68%; font-size: clamp(48px, 9vw, 112px); line-height: 0.86; letter-spacing: -0.02em; text-transform: uppercase; }
+    .lede { max-width: 38em; margin: 22px 0 0; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; font-weight: 600; font-stretch: 95%; }
+    .head { margin-bottom: clamp(32px, 5vw, 56px); }
+    .sub { margin: clamp(48px, 6vw, 72px) 0 20px; font-weight: 900; font-stretch: 80%; font-size: clamp(26px, 3.4vw, 36px); line-height: 1; text-transform: uppercase; }
+    .note { margin: 14px 0 0; font-size: 15px; line-height: 1.5; font-weight: 600; }
+
+    /* top strip */
+    .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-block: 22px 0; font-size: 13px; }
+    .top a { text-decoration: none; }
+    .top a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    /* ---------- hero: Nawfal's launch poster, as a page ---------- */
+    .hero__field { position: relative; overflow: hidden; padding-bottom: clamp(24px, 3.4vw, 44px); }
+    .hero__club { position: relative; margin-top: clamp(28px, 4vw, 48px); text-align: center; font-size: clamp(11px, 1.15vw, 13px); }
+    .hero__clubText { display: inline-block; margin: 0; font-weight: 800; font-stretch: 62%; font-size: clamp(20px, 3.5vw, 44px); line-height: 1; letter-spacing: -0.01em; text-transform: uppercase; filter: url(#uu-smear-soft); }
+    .hero__title { position: relative; margin-top: clamp(40px, 6vw, 76px); font-size: clamp(11px, 1.15vw, 13px); }
+    .hero__lineWrap { position: relative; margin-top: clamp(18px, 2.6vw, 32px); font-size: clamp(11px, 1.15vw, 13px); }
+    .hero__line { display: inline-block; margin: 0; white-space: nowrap; font-weight: 500; font-stretch: 62%; font-size: 64px; line-height: 1.05; letter-spacing: 0.03em; filter: url(#uu-smear); }
+    .hero .uu-track__tag { font-size: 1em; padding: 0.25em 0.45em 0.15em; }
+    .hero__dither { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+    .hero__crosses { position: relative; height: 0; font-size: 14px; color: var(--uu-ink); }
+    .hero__slab { padding-block: clamp(18px, 2.6vw, 32px) clamp(24px, 3.6vw, 46px); }
+    .hero__slab .uu-slab__big { font-size: clamp(54px, 9vw, 116px); }
+    .hero__row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 24px; margin-top: clamp(16px, 2.2vw, 26px); padding-top: clamp(10px, 1.4vw, 16px); border-top: 2px solid var(--uu-paper); }
+    .hero__row--facts { font-size: clamp(26px, 3.8vw, 48px); }
+    .hero__row--mono { margin-top: clamp(12px, 1.6vw, 18px); font-size: clamp(11px, 1.1vw, 14px); letter-spacing: 0.26em; }
+
+    /* ---------- intro ---------- */
+    .actions { display: flex; flex-wrap: wrap; gap: 14px 16px; margin-top: 34px; font-size: 17px; }
+
+    /* ---------- the idea ---------- */
+    .moves { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 28px; }
+    .move { display: grid; gap: 14px; align-content: start; }
+    .move__demo { position: relative; height: 210px; overflow: hidden; border: 3px solid var(--uu-ink); background: var(--uu-paper); }
+    .move h3 { margin: 4px 0 0; font-weight: 900; font-stretch: 80%; font-size: 26px; line-height: 1; text-transform: uppercase; }
+    .move > p { margin: 0; font-size: 16px; line-height: 1.5; font-weight: 600; font-stretch: 95%; }
+    .move .demo-pixel { position: absolute; left: 16px; top: 20px; width: calc(100% - 32px); }
+    .demo-blur { position: absolute; left: 16px; bottom: 26px; margin: 0; font-size: 34px; white-space: nowrap; }
+    .demo-track { position: absolute; left: 22px; top: 70px; margin: 0; font-size: 76px; }
+    .demo-track .uu-track { inset: -4px -6px -12px -6px; font-size: 15px; }
+    .demo-trail { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .demo-window { position: absolute; left: 16px; right: 22px; top: 18px; font-size: 10.5px; }
+    .move__demo.uu-slab { background: var(--uu-red); }
+    .demo-slab { position: absolute; inset: 0; padding: 18px 16px; }
+    .demo-slab .uu-slab__big { font-size: 52px; }
+    .demo-slab .uu-slab__row { margin-top: 12px; font-size: 26px; }
+    .rule-callout { margin-top: clamp(40px, 6vw, 64px); padding: clamp(22px, 3vw, 32px); color: var(--uu-paper); background: var(--uu-ink); }
+    .rule-callout b { display: block; font-weight: 900; font-stretch: 70%; font-size: clamp(34px, 6vw, 68px); line-height: 0.9; text-transform: uppercase; }
+    .rule-callout p { margin: 14px 0 0; max-width: 40em; font-size: 17px; line-height: 1.5; font-weight: 600; }
+
+    /* ---------- colour ---------- */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .swatch { display: grid; grid-template-rows: 170px auto; padding: 0; text-align: left; color: var(--uu-ink); background: var(--uu-paper); border: 3px solid var(--uu-ink); box-shadow: 6px 6px 0 var(--uu-ink); font: inherit; cursor: copy; }
+    .swatch:active { transform: translate(6px, 6px); box-shadow: none; }
+    .swatch__chip { border-bottom: 3px solid var(--uu-ink); }
+    .swatch__info { display: grid; gap: 4px; padding: 14px 16px 16px; }
+    .swatch__name { font-weight: 900; font-stretch: 75%; font-size: 30px; line-height: 1; text-transform: uppercase; }
+    .swatch__hex { font-family: var(--uu-mono); font-size: 15px; letter-spacing: 0.1em; }
+    .swatch__use { font-size: 15px; line-height: 1.4; font-weight: 600; }
+    .copied { min-height: 1.5em; margin: 18px 0 0; font-family: var(--uu-mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .pairs { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+    .pair { display: grid; gap: 8px; align-content: space-between; min-height: 132px; padding: 14px 14px 12px; border: 3px solid var(--uu-ink); }
+    .pair__aa { font-weight: 900; font-stretch: 75%; font-size: 44px; line-height: 0.9; }
+    .pair__say { font-weight: 800; font-size: 19px; line-height: 1.15; text-transform: uppercase; }
+    .rules { display: grid; gap: 10px; max-width: 44em; margin: 28px 0 0; padding-left: 1.2em; font-size: 17px; line-height: 1.5; font-weight: 600; }
+
+    /* ---------- type ---------- */
+    .specimens { display: grid; gap: clamp(32px, 4vw, 48px); }
+    .specimen { display: grid; gap: 12px; padding-top: 18px; border-top: 2px solid var(--uu-paper); }
+    .specimen__label { font-family: var(--uu-mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .specimen__big { margin: 0; font-size: clamp(56px, 12vw, 152px); }
+    .specimen__lower { margin: 0; color: var(--uu-red); font-size: clamp(56px, 12vw, 152px); }
+    .specimen__head { margin: 0; font-size: clamp(32px, 5vw, 56px); }
+    .specimen__body { margin: 0; max-width: 34em; font-size: 19px; }
+    .specimen__mono { margin: 0; font-size: clamp(15px, 1.8vw, 20px); }
+    .voices { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+    .voice h3 { margin: 0 0 8px; font-weight: 900; font-stretch: 80%; font-size: 28px; text-transform: uppercase; }
+    .voice p { margin: 0 0 18px; font-size: 16px; line-height: 1.5; font-weight: 600; }
+    .tags { display: flex; flex-wrap: wrap; gap: 12px; }
+    .tag { display: inline-block; padding: 6px 10px 4px; color: var(--uu-paper); background: var(--uu-red); }
+    .tag--sys { font-family: var(--uu-mono); font-size: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .tag--user { font-weight: 700; font-stretch: 85%; font-size: 21px; }
+
+    /* ---------- parts ---------- */
+    .parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 28px; }
+    .part { display: grid; grid-template-rows: auto 1fr; gap: 12px; }
+    .part__label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; padding-bottom: 8px; border-bottom: 2px solid var(--uu-ink); }
+    .part__label b { font-weight: 900; font-stretch: 80%; font-size: 22px; text-transform: uppercase; }
+    .part__stage { position: relative; display: grid; place-items: center; min-height: 230px; padding: 28px 22px; border: 3px solid var(--uu-ink); overflow: hidden; }
+    .part__stage--red { background: var(--uu-red); }
+    .part__stage--start { place-items: start stretch; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 16px; font-size: 16px; }
+    .track-demo { position: relative; margin: 30px 0 0; font-size: 64px; }
+    .track-demo .uu-track { inset: -6px -8px -14px; font-size: 18px; }
+    .stage-cross { color: var(--uu-ink); font-size: 18px; }
+    .app { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 28px; }
+    .deal { display: grid; gap: 14px; font-size: 15px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 12px; font-size: 16px; }
+    .rate-wrap { font-size: 16px; }
+    .rate-q { margin: 0 0 12px; font-weight: 900; font-stretch: 80%; font-size: 22px; text-transform: uppercase; }
+
+    /* ---------- voice ---------- */
+    .lines { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+    .lines h3, .dodont h3 { margin: 0 0 12px; font-weight: 900; font-stretch: 80%; font-size: 26px; text-transform: uppercase; }
+    .lines ul, .dodont ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .lines li { padding: 10px 12px 8px; border: 2px solid var(--uu-ink); font-size: 17px; line-height: 1.35; font-weight: 700; }
+    .lines li.mono { font-family: var(--uu-mono); font-weight: 400; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .dodont { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: clamp(40px, 5vw, 56px); }
+    .dodont li { position: relative; padding-left: 42px; font-size: 17px; line-height: 1.45; font-weight: 600; }
+    .dodont li::before { position: absolute; left: 0; top: 0; font-family: var(--uu-mono); }
+    .do li::before { content: "[✓]"; }
+    .dont li::before { content: "[×]"; color: var(--uu-red); }
+
+    /* ---------- posters ---------- */
+    .rollout { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 32px 24px; margin: 0; padding: 0; list-style: none; }
+    .poster { display: grid; gap: 10px; align-content: start; }
+    .poster__img { display: grid; place-items: center; aspect-ratio: 1200 / 1697; background: var(--uu-ink); border: 2px solid var(--uu-paper); }
+    .poster__img img { width: 100%; height: 100%; object-fit: contain; }
+    .poster__n { font-family: var(--uu-mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .poster h3 { margin: 0; font-weight: 900; font-stretch: 80%; font-size: 24px; line-height: 1; text-transform: uppercase; }
+    .poster p { margin: 0; font-size: 15px; line-height: 1.45; font-weight: 600; }
+    .poster a { justify-self: start; font-family: var(--uu-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; text-underline-offset: 4px; }
+    .sizes { width: 100%; margin-top: 28px; border-collapse: collapse; font-size: 16px; }
+    .sizes th, .sizes td { padding: 12px 10px 10px 0; text-align: left; vertical-align: top; border-top: 2px solid var(--uu-paper); }
+    .sizes th { width: 34%; font-weight: 900; font-stretch: 80%; font-size: 19px; text-transform: uppercase; }
+    .sizes td { font-weight: 600; line-height: 1.45; }
+
+    /* ---------- files ---------- */
+    .marks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+    .mark { display: grid; gap: 10px; }
+    .mark__img { display: block; height: 150px; padding: 20px; border: 3px solid var(--uu-ink); }
+    .mark__img img { width: 100%; height: 100%; object-fit: contain; }
+    .mark a { font-family: var(--uu-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; text-underline-offset: 4px; }
+    .files { display: grid; margin: 0; padding: 0; list-style: none; border-top: 3px solid var(--uu-ink); }
+    .files li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: baseline; padding: 16px 0 14px; border-bottom: 2px solid var(--uu-ink); }
+    .files b { font-weight: 900; font-stretch: 85%; font-size: 21px; text-transform: uppercase; }
+    .files span { grid-column: 1; font-size: 15px; line-height: 1.45; font-weight: 600; }
+    .files a { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-size: 14px; }
+
+    footer { padding-block: 40px 56px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; font-size: 13px; }
+
+    @media (max-width: 560px) {
+      .files li { grid-template-columns: 1fr; }
+      .files a { grid-row: auto; grid-column: 1; justify-self: start; margin-top: 8px; }
+      .sizes th { width: 40%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+    <filter id="uu-smear" x="-2%" y="-40%" width="104%" height="180%" primitiveUnits="objectBoundingBox"><feGaussianBlur stdDeviation="0.0022 0.1"/></filter>
+    <filter id="uu-smear-soft" x="-2%" y="-40%" width="104%" height="180%" primitiveUnits="objectBoundingBox"><feGaussianBlur stdDeviation="0.0012 0.035"/></filter>
+  </svg>
+  <div class="hero__field">
+    <div class="wrap">
+      <nav class="top uu-mono" aria-label="Back">
+        <a href="../">← All resources</a>
+        <span>Event 002 · Brand sheet</span>
+      </nav>
+      <h1 class="sr-only">USER UNFRIENDLY, GDG on Campus UOBD × Computing Club: the brand sheet</h1>
+      <div class="hero__club" data-hero-club aria-hidden="true">
+        <p class="hero__clubText">GDG on Campus UOBD × Computing <span class="hit">Club</span></p>
+      </div>
+      <div class="hero__title" data-hero-title aria-hidden="true">
+        <canvas class="uu-pixels" width="52" height="24"></canvas>
+      </div>
+      <div class="hero__lineWrap" data-hero-line aria-hidden="true">
+        <p class="hero__line">if you can read the text above, <span class="hit">we failed</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="hero__crosses" aria-hidden="true">
+    <i class="uu-cross" style="left: 21%; top: 2.2vw"></i>
+    <i class="uu-cross" style="left: 59%; top: 1.4vw"></i>
+    <i class="uu-cross" style="left: 74%; top: 2.6vw"></i>
+    <i class="uu-cross" style="left: 93%; top: 1.8vw"></i>
+  </div>
+  <canvas class="hero__dither" data-dither width="200" height="18" aria-hidden="true"></canvas>
+  <div class="uu-slab hero__slab">
+    <div class="wrap">
+      <p class="uu-slab__big">Good UI.<br>Bad UX.</p>
+      <div class="hero__row hero__row--facts"><span class="uu-slab__fact">Tue 27 Oct</span><span class="uu-slab__fact">16:00–18:00</span></div>
+      <div class="hero__row hero__row--mono uu-mono"><span>Build a site that looks great and is horrible to use</span><span>Room 0411</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================= INTRO ======================= -->
+<section class="band band--ink" aria-labelledby="about-title">
+  <div class="wrap">
+    <p class="kicker">The brand sheet</p>
+    <h2 id="about-title" class="sect">Best UI.<br>Worst UX.</h2>
+    <p class="lede">USER UNFRIENDLY is about the best-looking interface with the worst experience: everything looks finished, and every feature fights back. This sheet is how we show that on posts, reels, slides, certificates and the event app. It's built from the approved posters, which are further down with the files.</p>
+    <div class="actions">
+      <a class="uu-btn uu-btn--red" href="#posters">Posters</a>
+      <a class="uu-btn" href="#files">Wordmarks and files</a>
+      <a class="uu-btn" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/user-unfriendly/USER-UNFRIENDLY.md">USER-UNFRIENDLY.md</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= THE IDEA ======================= -->
+<section class="band" aria-labelledby="idea-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">01 · The idea</p>
+      <h2 id="idea-title" class="sect">Looks perfect.<br>Works terribly.</h2>
+      <p class="lede">Design it like it ships tomorrow: clean type, a sharp layout, confident colour. Then ruin the features, the buttons, forms, sliders, captchas and pop-ups people actually have to use. The posters do it with these four moves; use one or two at a time.</p>
+    </div>
+    <div class="moves">
+      <article class="move">
+        <div class="move__demo" aria-hidden="true">
+          <div class="uu-window demo-window">
+            <div class="uu-window__bar"><span>Error 002</span><span>× (decorative)</span></div>
+            <div class="uu-window__body">
+              <span class="uu-window__icon">!</span>
+              <div><p class="uu-window__title">Are you sure you're sure?</p></div>
+              <div class="uu-window__actions"><span class="uu-btn">No</span><span class="uu-btn uu-btn--ink">Cancel (means OK)</span></div>
+            </div>
+          </div>
+        </div>
+        <h3>Features that fight back</h3>
+        <p>Buttons that lie, forms that never submit, pop-ups that won't close. CANCEL (MEANS OK) is the whole event in three words. Drawn as flat paper windows with ink title bars and hard shadows.</p>
+      </article>
+      <article class="move">
+        <div class="move__demo" aria-hidden="true">
+          <svg class="demo-trail" viewBox="0 0 300 210" preserveAspectRatio="none">
+            <polyline points="40,190 70,170 120,182 160,150 210,168 250,120 268,150 280,96" fill="none" stroke="#E5231B" stroke-width="2"/>
+            <g fill="#E5231B"><circle cx="40" cy="190" r="5"/><circle cx="70" cy="170" r="5"/><circle cx="120" cy="182" r="5"/><circle cx="160" cy="150" r="5"/><circle cx="210" cy="168" r="5"/><circle cx="250" cy="120" r="5"/><circle cx="268" cy="150" r="5"/><circle cx="280" cy="96" r="5"/></g>
+          </svg>
+          <p class="demo-track uu-display uu-display--lower">click<span class="uu-track"><span class="uu-track__tag">Rage clicks ×12</span></span></p>
+          <i class="uu-cross" style="left: 78%; top: 18%; font-size: 14px"></i>
+          <i class="uu-cross" style="left: 12%; top: 14%; font-size: 14px"></i>
+        </div>
+        <h3>It's watching you</h3>
+        <p>Tracking boxes, cursor trails and crosshairs, as if the site were studying its user. Thin red boxes with a red tag on top.</p>
+      </article>
+      <article class="move">
+        <div class="move__demo" aria-hidden="true">
+          <canvas class="uu-pixels demo-pixel" data-demo-pixel width="34" height="10"></canvas>
+          <p class="demo-blur uu-display uu-display--lower uu-blur">forgot password?</p>
+        </div>
+        <h3>Can't read it, can't use it</h3>
+        <p>Blur, pixelate or censor exactly what someone needs: a label, a button, the name of the event. The greys you get from blurring ink are the only greys allowed.</p>
+      </article>
+      <article class="move">
+        <div class="move__demo uu-slab" aria-hidden="true">
+          <div class="demo-slab">
+            <p class="uu-slab__big">Good UI.<br>Bad UX.</p>
+            <div class="uu-slab__row"><span class="uu-slab__fact">Tue 27 Oct</span><span class="uu-slab__fact">16:00</span></div>
+          </div>
+        </div>
+        <h3>The facts always work</h3>
+        <p>The red slab holds GOOD UI. BAD UX., the date, the time and the room. It's the one feature we never ruin.</p>
+      </article>
+    </div>
+    <div class="rule-callout">
+      <b>Ruin the features.<br>Never the facts.</b>
+      <p>Anything on a poster, in a reel or in the app can be broken on purpose, except the facts: the date, time, room and how to sign up always work and are easy to read. If someone can't tell when and where it is, the joke is on us.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= COLOUR ======================= -->
+<section class="band" aria-labelledby="colour-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">02 · Colour</p>
+      <h2 id="colour-title" class="sect">Three colours.<br>That's it.</h2>
+      <p class="lede">Red, ink and paper, always flat. Click a colour to copy its hex code.</p>
+    </div>
+    <div class="swatches">
+      <button class="swatch" type="button" data-copy="#E5231B">
+        <span class="swatch__chip" style="background: var(--uu-red)"></span>
+        <span class="swatch__info"><span class="swatch__name">Red</span><span class="swatch__hex">#E5231B</span><span class="swatch__use">The event. Slabs, backgrounds, tracking boxes, tags and icons.</span></span>
+      </button>
+      <button class="swatch" type="button" data-copy="#0D0D0D">
+        <span class="swatch__chip" style="background: var(--uu-ink)"></span>
+        <span class="swatch__info"><span class="swatch__name">Ink</span><span class="swatch__hex">#0D0D0D</span><span class="swatch__use">Type, title bars, outlines and every shadow.</span></span>
+      </button>
+      <button class="swatch" type="button" data-copy="#F2EEE6">
+        <span class="swatch__chip" style="background: var(--uu-paper)"></span>
+        <span class="swatch__info"><span class="swatch__name">Paper</span><span class="swatch__hex">#F2EEE6</span><span class="swatch__use">The field the title sits on, windows, and type on red or ink.</span></span>
+      </button>
+    </div>
+    <p class="copied" role="status" aria-live="polite" data-copied></p>
+
+    <h3 class="sub">What goes on what</h3>
+    <div class="pairs">
+      <div class="pair" style="color: var(--uu-ink); background: var(--uu-paper)"><span class="pair__aa">Aa</span><span class="pair__say">Ink on paper<br>any size · 16.8:1</span></div>
+      <div class="pair" style="color: var(--uu-paper); background: var(--uu-ink)"><span class="pair__aa">Aa</span><span class="pair__say">Paper on ink<br>any size · 16.8:1</span></div>
+      <div class="pair" style="color: var(--uu-paper); background: var(--uu-red)"><span class="pair__aa">Aa</span><span class="pair__say">Paper on red<br>big type · 4.0:1</span></div>
+      <div class="pair" style="color: var(--uu-ink); background: var(--uu-red)"><span class="pair__aa">Aa</span><span class="pair__say">Ink on red<br>big type · 4.2:1</span></div>
+      <div class="pair" style="color: var(--uu-red); background: var(--uu-ink)"><span class="pair__aa">Aa</span><span class="pair__say">Red on ink<br>big type · 4.2:1</span></div>
+      <div class="pair" style="color: var(--uu-red); background: var(--uu-paper)"><span class="pair__aa">Aa</span><span class="pair__say" style="color: var(--uu-ink)">Red on paper<br>big type, lines · 4.0:1</span></div>
+    </div>
+    <ul class="rules">
+      <li>On screens, small text goes on paper or ink. Anything on red, or red text, is big: 24px and up, or 19px bold. The one exception is the slab's single line of DM Mono, kept from the posters.</li>
+      <li>No gradients, no tints, no transparency and no fourth colour. Greys only appear where ink is blurred or pixelated.</li>
+      <li>Shadows are hard, ink and offset down and right. On an ink background they turn red.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================= TYPE ======================= -->
+<section class="band band--ink" aria-labelledby="type-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">03 · Type</p>
+      <h2 id="type-title" class="sect">Squeezed<br>and shouting</h2>
+      <p class="lede">Archivo for everything you read, squeezed narrow and set black for titles. DM Mono, in tracked capitals, for anything the system says. Both are free (SIL Open Font License) and in the files below.</p>
+    </div>
+    <div class="specimens">
+      <div class="specimen">
+        <span class="specimen__label">Title · Archivo 900 · width 62% · capitals · line height 0.82</span>
+        <p class="specimen__big uu-display">User unfriendly</p>
+      </div>
+      <div class="specimen">
+        <span class="specimen__label">Title, lowercase · width 70% · for blurred and tracked titles</span>
+        <p class="specimen__lower uu-display uu-display--lower">user unfriendly</p>
+      </div>
+      <div class="specimen">
+        <span class="specimen__label">Headline · Archivo 900 · width 80%</span>
+        <p class="specimen__head uu-head">This website was built badly on purpose.</p>
+      </div>
+      <div class="specimen">
+        <span class="specimen__label">Body · Archivo 600 · width 95%</span>
+        <p class="specimen__body uu-text">Build a site that looks great and is horrible to use. Present it. The room votes. AI allowed, no experience needed.</p>
+      </div>
+      <div class="specimen">
+        <span class="specimen__label">System · DM Mono · capitals · letter spacing 0.14em</span>
+        <p class="specimen__mono uu-mono">AGENDA.EXE · 5 steps · 2 hours · Event 002</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Two voices</h3>
+    <div class="voices">
+      <div class="voice">
+        <h3>The system</h3>
+        <p>Machine labels in DM Mono capitals: measurements, statuses and window titles. Calm, precise and slightly creepy.</p>
+        <div class="tags"><span class="tag tag--sys">Rage clicks ×12</span><span class="tag tag--sys">User_014 · lost 0.97</span><span class="tag tag--sys">Gave up</span></div>
+      </div>
+      <div class="voice">
+        <h3>The user</h3>
+        <p>Lowercase complaints in Archivo bold, typed in a panic with no punctuation. From Nawfal's launch poster.</p>
+        <div class="tags"><span class="tag tag--user">i cant find the back button help</span><span class="tag tag--user">the 2FA human captcha denied me</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PARTS ======================= -->
+<section class="band" aria-labelledby="parts-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">04 · Parts</p>
+      <h2 id="parts-title" class="sect">The parts</h2>
+      <p class="lede">The pieces the posters are built from, live. Each comes from <code>user-unfriendly.css</code>, sized in em, so changing the font size scales the whole part. The class name is next to each one.</p>
+    </div>
+    <div class="parts">
+      <div class="part">
+        <div class="part__label"><b>System window</b><code>.uu-window</code></div>
+        <div class="part__stage part__stage--red" style="font-size: 13px">
+          <div class="uu-window" style="width: 100%">
+            <div class="uu-window__bar"><span>Error 002</span><span>× (decorative)</span></div>
+            <div class="uu-window__body">
+              <span class="uu-window__icon" aria-hidden="true">!</span>
+              <div><p class="uu-window__title">This website was built badly on purpose.</p><p class="uu-window__text">Build a site that looks great and is horrible to use.</p></div>
+              <div class="uu-window__actions"><button class="uu-btn" type="button">No</button><button class="uu-btn" type="button">Also no</button><button class="uu-btn uu-btn--ink" type="button">Cancel (means OK)</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part__label"><b>Buttons</b><code>.uu-btn · --ink · --red</code></div>
+        <div class="part__stage">
+          <div class="btn-row">
+            <button class="uu-btn" type="button">Join</button>
+            <button class="uu-btn uu-btn--ink" type="button">Deal</button>
+            <button class="uu-btn uu-btn--red" type="button">Submit link</button>
+            <button class="uu-btn" type="button" disabled>Locked</button>
+          </div>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part__label"><b>Tracking box</b><code>.uu-track · __tag · --user · .uu-cross</code></div>
+        <div class="part__stage">
+          <p class="track-demo uu-display uu-display--lower" aria-hidden="true">the exit<span class="uu-track"><span class="uu-track__tag">Cursor last seen here</span></span></p>
+          <i class="uu-cross stage-cross" style="left: 10%; top: 16%"></i>
+          <i class="uu-cross stage-cross" style="left: 86%; top: 74%"></i>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part__label"><b>Key cap</b><code>.uu-key</code></div>
+        <div class="part__stage part__stage--red" style="font-size: 26px">
+          <span class="uu-key">esc<small>Does nothing</small></span>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part__label"><b>Agenda</b><code>.uu-agenda</code></div>
+        <div class="part__stage part__stage--start" style="font-size: 14px">
+          <div class="uu-agenda">
+            <div class="uu-agenda__bar"><span>AGENDA.EXE</span><span>5 steps · 2 hours</span></div>
+            <div class="uu-agenda__row"><i class="uu-agenda__tick"></i><span class="uu-agenda__time">16:10</span><span class="uu-agenda__what">Get your feature<span class="uu-agenda__note">Draw a chit: a login, a volume slider… yours to ruin.</span></span><span class="uu-agenda__len">5 MIN</span></div>
+            <div class="uu-agenda__row uu-agenda__row--now"><i class="uu-agenda__tick"></i><span class="uu-agenda__time">16:15</span><span class="uu-agenda__what">Build it pretty. Make it painful.<span class="uu-agenda__note">Bring your own tools. AI allowed.</span></span><span class="uu-agenda__len">55 MIN</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part__label"><b>Slab</b><code>.uu-slab</code></div>
+        <div class="part__stage part__stage--start uu-slab" style="font-size: 16px">
+          <div>
+            <p class="uu-slab__big" style="font-size: 64px">Good UI.<br>Bad UX.</p>
+            <div class="uu-slab__row" style="margin-top: 14px; font-size: 34px"><span class="uu-slab__fact">Tue 27 Oct</span><span class="uu-slab__fact">16:00–18:00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">In the event app</h3>
+    <p class="note" style="margin: -8px 0 24px; max-width: 40em">The phones and the projector use the same parts. Try the badges and the blocks: they work.</p>
+    <div class="app">
+      <div class="part">
+        <div class="part__label"><b>Dealt cards</b><code>.uu-card · --site</code></div>
+        <div class="part__stage part__stage--start">
+          <div class="deal">
+            <div class="uu-card uu-card--site"><span class="uu-card__kind">Your website</span><p class="uu-card__name">A pizza delivery app</p></div>
+            <div class="uu-card"><span class="uu-card__kind">Feature 1 · ruin it</span><p class="uu-card__name">Login</p></div>
+            <div class="uu-card"><span class="uu-card__kind">Feature 2 · ruin it</span><p class="uu-card__name">Volume control</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part__label"><b>Award badges</b><code>.uu-badge</code></div>
+        <div class="part__stage part__stage--start">
+          <div>
+            <p class="rate-q">Which titles does it deserve?</p>
+            <div class="badges" data-badges>
+              <button class="uu-badge" type="button" aria-pressed="true">Best design</button>
+              <button class="uu-badge" type="button" aria-pressed="false">Funniest bad UX</button>
+              <button class="uu-badge" type="button" aria-pressed="false">Most creative UX</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part__label"><b>Judges' blocks</b><code>.uu-rate</code></div>
+        <div class="part__stage part__stage--start">
+          <div class="rate-wrap">
+            <p class="rate-q">How good is this entry?</p>
+            <div class="uu-rate" data-rate role="group" aria-label="Rating">
+              <button class="uu-rate__block" type="button" aria-pressed="false" style="--fill: 0%">Super poop</button>
+              <button class="uu-rate__block" type="button" aria-pressed="false" style="--fill: 20%">Poop</button>
+              <button class="uu-rate__block" type="button" aria-pressed="false" style="--fill: 40%">OK</button>
+              <button class="uu-rate__block" type="button" aria-pressed="false" style="--fill: 60%">Good</button>
+              <button class="uu-rate__block" type="button" aria-pressed="true" style="--fill: 80%">Epic</button>
+              <button class="uu-rate__block" type="button" aria-pressed="false" style="--fill: 100%">Legen­dary</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= VOICE ======================= -->
+<section class="band" aria-labelledby="voice-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">05 · Voice</p>
+      <h2 id="voice-title" class="sect">Deadpan.<br>Slightly broken.</h2>
+      <p class="lede">The interface is the villain, never the person. Write like a system that has stopped trying to help: short, polite and wrong in exactly the right place.</p>
+    </div>
+    <div class="lines">
+      <div>
+        <h3>Lines we've used</h3>
+        <ul>
+          <li class="mono">Cancel (means OK)</li>
+          <li class="mono">× (decorative)</li>
+          <li class="mono">Title hidden for your convenience</li>
+          <li class="mono">Loading a website nobody can use · stuck since Tuesday</li>
+          <li>If you can read the title, we designed it wrong.</li>
+          <li>Are you sure you're sure?</li>
+        </ul>
+      </div>
+      <div>
+        <h3>The facts, plainly</h3>
+        <ul>
+          <li>Good UI. Bad UX.</li>
+          <li>Build a site that looks great and is horrible to use.</li>
+          <li>Tue 27 Oct · 16:00–18:00 · Room 0411</li>
+          <li>Come as a team or find one here. AI allowed. No experience needed. Free.</li>
+          <li>GDG on Campus UOBD × Computing Club</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dodont">
+      <div class="do">
+        <h3>Do</h3>
+        <ul>
+          <li>Make every joke a broken feature: a button, a captcha, a cookie banner, a loading bar.</li>
+          <li>Say "team": it's a team event.</li>
+          <li>Put both clubs on everything: GDG on Campus UOBD × Computing Club.</li>
+          <li>Write USER UNFRIENDLY in capitals, or all lowercase in a blurred or tracked title.</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <h3>Don't</h3>
+        <ul>
+          <li>Blur, track or break the date, time, room or sign-up link.</li>
+          <li>Make fun of real people, or name a real product as the bad one.</li>
+          <li>Write "solo": that was the old plan.</li>
+          <li>Add a fourth colour, a gradient or a soft shadow.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= POSTERS ======================= -->
+<section class="band band--ink" id="posters" aria-labelledby="posters-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">06 · Posters</p>
+      <h2 id="posters-title" class="sect">The roll-out</h2>
+      <p class="lede">Not one poster but a series, posted in this order so the event feels like a whole thing (Nawfal's idea). All six are approved. Each downloads as a full-size PNG.</p>
+    </div>
+    <ol class="rollout">
+      <li class="poster">
+        <div class="poster__img"><img src="posters/web/user-unfriendly-01-launch.jpg" alt="Launch poster: a pixelated, blurry USER UNFRIENDLY on paper with red tracking boxes, a red pixel edge and a red slab reading GOOD UI. BAD UX., Tue 27 Oct, 16:00–18:00" loading="lazy" width="720" height="900"></div>
+        <span class="poster__n">01 · Launch · by Nawfal</span>
+        <h3>Can you read this?</h3>
+        <p>The first post. 1080×1350 for Instagram. Still says ROOM TBA: ask Nawfal for a version with 0411 before reposting.</p>
+        <a href="posters/user-unfriendly-01-launch.png" download>Download PNG</a>
+      </li>
+      <li class="poster">
+        <div class="poster__img"><img src="posters/web/user-unfriendly-02-esc.jpg" alt="Red poster with a blurred lowercase title and a paper esc key that does nothing" loading="lazy" width="720" height="1018"></div>
+        <span class="poster__n">02 · Locked in</span>
+        <h3>esc does nothing</h3>
+        <p>The blurred title and the useless esc key. 2400×3394.</p>
+        <a href="posters/user-unfriendly-02-esc.png" download>Download PNG</a>
+      </li>
+      <li class="poster">
+        <div class="poster__img"><img src="posters/web/user-unfriendly-03-tracked.jpg" alt="Paper poster: a huge lowercase user unfriendly covered in red tracking boxes and a cursor trail, over a red slab" loading="lazy" width="720" height="1018"></div>
+        <span class="poster__n">03 · Locked in</span>
+        <h3>Tracked</h3>
+        <p>Tracking boxes and a cursor trail over the title, with the slab below. 2400×3394.</p>
+        <a href="posters/user-unfriendly-03-tracked.png" download>Download PNG</a>
+      </li>
+      <li class="poster">
+        <div class="poster__img"><img src="posters/web/user-unfriendly-04-error.jpg" alt="Red poster: USER UNFRIENDLY over a stack of error windows with the buttons NO, ALSO NO and CANCEL (MEANS OK)" loading="lazy" width="720" height="1018"></div>
+        <span class="poster__n">04 · Itinerary and more</span>
+        <h3>Error windows</h3>
+        <p>For the posts that explain what happens. 2400×3394.</p>
+        <a href="posters/user-unfriendly-04-error.png" download>Download PNG</a>
+      </li>
+      <li class="poster">
+        <div class="poster__img"><img src="posters/web/user-unfriendly-05-agenda-red.jpg" alt="Red poster: the title four times, losing resolution each time, above the AGENDA.EXE agenda" loading="lazy" width="720" height="1018"></div>
+        <span class="poster__n">05 · The agenda</span>
+        <h3>Losing resolution</h3>
+        <p>The full agenda, in red. 2400×3394.</p>
+        <a href="posters/user-unfriendly-05-agenda-red.png" download>Download PNG</a>
+      </li>
+      <li class="poster">
+        <div class="poster__img"><img src="posters/web/user-unfriendly-06-agenda-paper.jpg" alt="Paper poster: the title under a red and grey mosaic censor, above the AGENDA.EXE agenda in ink" loading="lazy" width="720" height="1018"></div>
+        <span class="poster__n">06 · The agenda</span>
+        <h3>Title hidden</h3>
+        <p>The same agenda on paper, with the mosaic censor. 2400×3394.</p>
+        <a href="posters/user-unfriendly-06-agenda-paper.png" download>Download PNG</a>
+      </li>
+    </ol>
+
+    <h3 class="sub">Sizes and grid</h3>
+    <table class="sizes">
+      <tr><th scope="row">Poster</th><td>1200×1697 (the A-series shape), exported at 2× (2400×3394).</td></tr>
+      <tr><th scope="row">Instagram post</th><td>1080×1350 (4:5).</td></tr>
+      <tr><th scope="row">Story or reel cover</th><td>1080×1920 (9:16). Keep the facts out of the top and bottom 250px, where Instagram puts its own buttons.</td></tr>
+      <tr><th scope="row">Margins</th><td>56px on a 1200-wide poster (about 4.7% of the width), on all four sides.</td></tr>
+      <tr><th scope="row">Top strip</th><td>DM Mono capitals: GDG on Campus UOBD × Computing Club on the left, Event 002 on the right.</td></tr>
+      <tr><th scope="row">Bottom</th><td>The slab or an info strip: the date and time big, then one line of DM Mono with the room.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ======================= FILES ======================= -->
+<section class="band" id="files" aria-labelledby="files-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">07 · Files</p>
+      <h2 id="files-title" class="sect">Take what<br>you need</h2>
+      <p class="lede">Wordmarks for reels and slides (transparent PNGs), the fonts, and the code for anything built on the web.</p>
+    </div>
+    <div class="marks">
+      <div class="mark">
+        <div class="mark__img" style="background: var(--uu-paper)"><img src="wordmarks/user-unfriendly-ink.png" alt="USER UNFRIENDLY wordmark in ink" width="600" height="80"></div>
+        <a href="wordmarks/user-unfriendly-ink.png" download>Ink · one line</a>
+      </div>
+      <div class="mark">
+        <div class="mark__img" style="background: var(--uu-red)"><img src="wordmarks/user-unfriendly-paper.png" alt="USER UNFRIENDLY wordmark in paper" width="600" height="80"></div>
+        <a href="wordmarks/user-unfriendly-paper.png" download>Paper · one line</a>
+      </div>
+      <div class="mark">
+        <div class="mark__img" style="background: var(--uu-ink)"><img src="wordmarks/user-unfriendly-red.png" alt="USER UNFRIENDLY wordmark in red" width="600" height="80"></div>
+        <a href="wordmarks/user-unfriendly-red.png" download>Red · one line</a>
+      </div>
+      <div class="mark">
+        <div class="mark__img" style="background: var(--uu-paper)"><img src="wordmarks/user-unfriendly-stacked-ink.png" alt="USER UNFRIENDLY wordmark in ink, on two lines" width="400" height="160"></div>
+        <a href="wordmarks/user-unfriendly-stacked-ink.png" download>Ink · stacked</a>
+      </div>
+      <div class="mark">
+        <div class="mark__img" style="background: var(--uu-red)"><img src="wordmarks/user-unfriendly-stacked-paper.png" alt="USER UNFRIENDLY wordmark in paper, on two lines" width="400" height="160"></div>
+        <a href="wordmarks/user-unfriendly-stacked-paper.png" download>Paper · stacked</a>
+      </div>
+      <div class="mark">
+        <div class="mark__img" style="background: var(--uu-paper)"><img src="wordmarks/user-unfriendly-pixel.png" alt="USER UNFRIENDLY wordmark, pixelated, on paper" width="520" height="240" style="image-rendering: pixelated"></div>
+        <a href="wordmarks/user-unfriendly-pixel.png" download>Pixelated · on paper</a>
+      </div>
+    </div>
+
+    <h3 class="sub">Everything else</h3>
+    <ul class="files">
+      <li><b>USER-UNFRIENDLY.md</b><span>These rules as one text file. Give it to a designer or an AI assistant so whatever they make matches.</span><a class="uu-btn" href="https://github.com/UdayAhuja19/gdg-resources/blob/main/user-unfriendly/USER-UNFRIENDLY.md">Read</a></li>
+      <li><b>user-unfriendly.css</b><span>The colours, type and every part on this page, sized in em. Link it and use the <code>uu-</code> classes.</span><a class="uu-btn" href="user-unfriendly.css" download>Download</a></li>
+      <li><b>user-unfriendly.js</b><span>The pixel effects: the mosaic title and the red dither edge, drawn on a canvas so they stay sharp at any size.</span><a class="uu-btn" href="user-unfriendly.js" download>Download</a></li>
+      <li><b>Archivo</b><span>The one font file covers every weight (100–900) and width (62–125%). SIL Open Font License.</span><a class="uu-btn" href="fonts/archivo-latin-wdth-normal.woff2" download>Download</a></li>
+      <li><b>DM Mono</b><span>Regular only. SIL Open Font License. On Google Fonts too.</span><a class="uu-btn" href="fonts/DMMono-Regular.ttf" download>Download</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="band--ink">
+  <div class="wrap uu-mono">
+    <span>USER UNFRIENDLY · Tue 27 Oct 2026 · Room 0411</span>
+    <span>GDG on Campus UOBD × Computing Club · <a href="../">All resources</a></span>
+  </div>
+</footer>
+
+<script type="module">
+  import { fontsReady, pixelText, dither } from "./user-unfriendly.js";
+
+  // Copy a colour's hex code
+  const said = document.querySelector("[data-copied]");
+  for (const swatch of document.querySelectorAll("[data-copy]")) {
+    swatch.addEventListener("click", async () => {
+      const hex = swatch.dataset.copy;
+      try {
+        await navigator.clipboard.writeText(hex);
+        said.textContent = `Copied ${hex}. Probably.`;
+      } catch {
+        said.textContent = `Couldn't copy. It's ${hex}.`;
+      }
+    });
+  }
+
+  // The app parts work: badges toggle, blocks pick one
+  for (const badge of document.querySelectorAll("[data-badges] .uu-badge")) {
+    badge.addEventListener("click", () => badge.setAttribute("aria-pressed", String(badge.getAttribute("aria-pressed") !== "true")));
+  }
+  const blocks = [...document.querySelectorAll("[data-rate] .uu-rate__block")];
+  for (const block of blocks) {
+    block.addEventListener("click", () => blocks.forEach((b) => b.setAttribute("aria-pressed", String(b === block))));
+  }
+
+  // A tracking box drawn round a fraction-of-the-parent rectangle
+  function track(parent, box, text, user) {
+    const pad = 0.03;
+    const el = document.createElement("span");
+    el.className = "uu-track";
+    Object.assign(el.style, { left: `${(box.x - pad / 2) * 100}%`, top: `${(box.y - pad) * 100}%`, width: `${(box.w + pad) * 100}%`, height: `${(box.h + pad * 2) * 100}%` });
+    el.innerHTML = `<span class="uu-track__tag${user ? " uu-track__tag--user" : ""}"></span>`;
+    el.firstChild.textContent = text;
+    parent.append(el);
+    return el;
+  }
+
+  dither(document.querySelector("[data-dither]"), { cols: 200, rows: 18 });
+
+  await fontsReady();
+
+  // The hero title, pixelated like the launch poster: tall letters, a box on the first U
+  const title = document.querySelector("[data-hero-title]");
+  const boxes = pixelText(title.querySelector("canvas"), { lines: ["USER", "UNFRIENDLY"], cols: 52, spread: [0], tall: 1.35, gap: 0.1 });
+  track(title, boxes[0][0], "i cant find the back button help", true);
+
+  // Boxes round words in the smeared lines sit outside the smear, so they stay sharp
+  const club = document.querySelector("[data-hero-club]");
+  const clubBox = track(club, { x: 0, y: 0, w: 0, h: 0 }, "</error>", true);
+  const lineWrap = document.querySelector("[data-hero-line]");
+  const line = lineWrap.querySelector(".hero__line");
+  const failed = track(lineWrap, { x: 0, y: 0, w: 0, h: 0 }, "the 2FA human captcha denied me", true);
+  // Draws the box round a word, never past the right edge; the tag flips to the right end if it would stick out
+  const around = (wrap, target, box, padX, padY, wider = 0) => {
+    const a = wrap.getBoundingClientRect(), b = target.getBoundingClientRect();
+    const left = b.left - a.left - padX;
+    const width = Math.min(b.width + 2 * padX + wider, a.width - left);
+    Object.assign(box.style, { left: `${left}px`, top: `${b.top - a.top - padY}px`, width: `${width}px`, height: `${b.height + 2 * padY}px` });
+    const tag = box.firstChild;
+    tag.classList.remove("uu-track__tag--end");
+    if (left + tag.getBoundingClientRect().width > a.width) tag.classList.add("uu-track__tag--end");
+  };
+  const layout = () => {
+    // The smeared line runs the full width, like the poster
+    line.style.fontSize = "64px";
+    line.style.fontSize = `${(64 * lineWrap.clientWidth) / line.getBoundingClientRect().width}px`;
+    around(lineWrap, line.querySelector(".hit"), failed, 6, 2);
+    const hit = club.querySelector(".hit");
+    around(club, hit, clubBox, 6, 10, hit.getBoundingClientRect().width * 1.6);
+  };
+  layout();
+  addEventListener("resize", layout);
+
+  // The small crisp pixel button label in the third move
+  pixelText(document.querySelector("[data-demo-pixel]"), { lines: ["SUBMIT"], cols: 34, crisp: true });
+</script>
+</body>
+</html>

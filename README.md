@@ -4,6 +4,7 @@ Shared tools and brand files for the team, live at **https://udayahuja19.github.
 
 | Resource | Where | What it's for |
 |---|---|---|
+| USER UNFRIENDLY | [`user-unfriendly/`](user-unfriendly/index.html) | Everything for our build event with the Computing Club (Tue 27 Oct, room 0411). **Best UI, worst UX** is its look: the brand sheet page, `USER-UNFRIENDLY.md` (the rules as text), `user-unfriendly.css`/`user-unfriendly.js` (tokens, parts and the pixel effects, which the event app uses too), the six approved posters in `posters/` and transparent wordmarks in `wordmarks/` |
 | hello, world! | [`hello-world/`](hello-world/index.html) | Everything for our first event (Tue 06 Oct). **Blue Ice** is its own look: the brand sheet page, `BLUE-ICE.md` (the rules as text), `blue-ice.css`/`blue-ice.js` (tokens and components, including the cracked wordmark), and the poster as PDF, JPG and editable HTML (`poster/poster-source.html`). Add the event's other resources here too |
 | Design system | [`design/`](design/index.html) | The brand rules shown live, with examples |
 | DESIGN.md | [`design/DESIGN.md`](design/DESIGN.md) | The same rules as a text file for designers, projects and AI assistants |

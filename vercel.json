@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/socials/", "permanent": false }
+  ]
+}

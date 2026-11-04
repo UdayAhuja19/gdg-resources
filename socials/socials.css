@@ -93,7 +93,7 @@
   margin-top: var(--space-5);
 }
 
-/* The next event's sign-up: above the club links, with a tag on top */
+/* The next event's sign-up (none right now): a <section class="socials__event"> above the club links, with a tag on top */
 .socials__event {
   display: flex;
   flex-direction: column;
